@@ -1,9 +1,9 @@
 //
-// Created by Qichen on 11/12/16.
+// Created by Qichen on 12/13/16.
 //
 
-#ifndef BOIDS_PREY_H
-#define BOIDS_PREY_H
+#ifndef BOIDS_PREDATOR_H
+#define BOIDS_PREDATOR_H
 #include "Object.h"
 #include "Geometry.h"
 #include "matrix/RotationHelper.h"
@@ -16,24 +16,25 @@
 #include <GL/glut.h>
 #endif
 
-class Prey: public Object {
+class Predator: public Object {
 public:
 
-    Prey(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
-             GLfloat *angularVelocity, GLfloat r);
+    Predator(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
+         GLfloat *angularVelocity, GLfloat r);
 
     void updateAcclrtn();
 
     void updateFlattenedTransformationMatrix(GLfloat t);
 
+    void hunt();
+
+    void kill(Prey prey);
     GLfloat radius;
 
     GLfloat getVelocityIn(const int direction);
     GLfloat velocity[3];
     GLfloat directionOfCollision[3];
     GLfloat angluarVelo[3];
-
-    void fall();
 
 private:
 
@@ -48,7 +49,5 @@ private:
 
     void setUnitTravelDirection();
 
-    bool isPreyDead;
 };
-
-#endif //BOIDS_PREY_H
+#endif //BOIDS_PREDATOR_H

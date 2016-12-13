@@ -1,10 +1,11 @@
 //
-// Created by Qichen on 11/12/16.
+// Created by Qichen on 12/13/16.
 //
-#include "Prey.h"
-const int Prey::X_DIRECTION = 0;
-const int Prey::Y_DIRECTION = 1;
-const int Prey::Z_DIRECTION = 2;
+
+#include "Predator.h"
+const int Predator::X_DIRECTION = 0;
+const int Predator::Y_DIRECTION = 1;
+const int Predator::Z_DIRECTION = 2;
 
 /**
  *  Prey is a subclass of Object
@@ -18,28 +19,27 @@ const int Prey::Z_DIRECTION = 2;
  * @param angularVelocity - initial angular velocity
  * @param r - radius
  */
-Prey::Prey(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn,
-     GLfloat *translatn, GLfloat * velocity, GLfloat * angularVelocity, GLfloat r)
+Predator::Predator(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn,
+           GLfloat *translatn, GLfloat * velocity, GLfloat * angularVelocity, GLfloat r)
         :Object(oId, lId, om, isF, orienttn, translatn){ // call the base class constructor first
     int i;
     radius = r;
     for (i = 0 ; i < 3; i++){
         *(acceleration + i) = 0;
-        *(Prey::velocity + i) = *(velocity + i);
-        *(Prey::angluarVelo + i) = *(angularVelocity + i);
+        *(Predator::velocity + i) = *(velocity + i);
+        *(Predator::angluarVelo + i) = *(angularVelocity + i);
         *(angularAcclrtn + i) = 0;
         *(directionOfCollision + i) = 0;
     }
-    isPreyDead = false;
-    isPredator = false;
     setUnitTravelDirection();
+    isPredator = true;
 }
 
 /***
  * update translation, rotation, velocity and angular velocity, then get the transformation matrix
  * @param t - delta t
  */
-void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
+void Predator::updateFlattenedTransformationMatrix(GLfloat t) {
     setUnitTravelDirection();
     updateAcclrtn();
     int i;
@@ -59,7 +59,7 @@ void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
  * @param direction indicate x or y or z direction
  * @return  the velocity in one direction
  */
-GLfloat Prey::getVelocityIn(const int direction) {
+GLfloat Predator::getVelocityIn(const int direction) {
     switch (direction){
         case X_DIRECTION:
             return *velocity;
@@ -75,7 +75,7 @@ GLfloat Prey::getVelocityIn(const int direction) {
 /***
  * set unit travel direction, which is used to determine the acceleration caused by friction.
  */
-void Prey::setUnitTravelDirection() {
+void Predator::setUnitTravelDirection() {
     Geometry::getUnitDirection(unitTravelDirection, velocity);
 }
 
@@ -83,14 +83,21 @@ void Prey::setUnitTravelDirection() {
  * update the acceleration for every time instance, if ball is in the air, it has g, if not in the air, it has
  * acceleration caused by friction
  */
-void Prey::updateAcclrtn() {
- //TODO how to update acceleration
+void Predator::updateAcclrtn() {
+    //TODO how to update acceleration
 }
 
 /**
- * When this function is called, it means the prey is dead.
+ * This function defines how predator chase preies
  */
-void Prey::fall() {
-//TODO fall
-    isPreyDead = true;
+void Predator::hunt() {
+//TODO
+}
+
+/**
+ * This function eliminates caught preies.
+ */
+void Predator::kill(Prey prey) {
+//TODO
+    prey.fall();
 }
