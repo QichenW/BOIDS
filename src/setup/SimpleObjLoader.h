@@ -28,6 +28,8 @@ public:
     static void recordObjectAsTrianglesWithNoVtNoVn();
 
     static void recordObjectAsQuadsWithNoVtNoVn();
+
+    static void recordObjectAsQuadsWithNoVt();
 };
 
 #endif //BOUNCINGBALLS_SIMPLEOBJHEADER_H

@@ -94,3 +94,24 @@ void Prey::fall() {
 //TODO fall
     isPreyDead = true;
 }
+
+/**
+ * boid behavior
+ */
+void Prey::boidSeperation(){
+    //TODO
+}
+
+/**
+ * boid behavior
+ */
+void Prey::boidAlignment(){
+    //TODO
+}
+
+/**
+ * boid behavior
+ */
+void Prey::boidCohesion(){
+    //TODO
+}

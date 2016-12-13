@@ -46,7 +46,7 @@ target_link_libraries(BOIDS ${EXTRA_LIBS} nativefiledialog)
 if (NOT CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_CURRENT_BINARY_DIR)
 
     # list of files for which we add a copy rule
-    set(object_files wall.obj soccer_ball.obj)
+    set(object_files wall.obj cone.obj)
 
     foreach(item IN LISTS object_files)
         message(STATUS ${item})
@@ -61,6 +61,6 @@ endif()
 # files are only copied if a target depends on them
 add_custom_target(obj ALL DEPENDS
         "${CMAKE_CURRENT_BINARY_DIR}/wall.obj"
-        "${CMAKE_CURRENT_BINARY_DIR}/soccer_ball.obj")
+        "${CMAKE_CURRENT_BINARY_DIR}/cone.obj")
 # add the dependency project to the project target
 ADD_DEPENDENCIES(BOIDS obj)

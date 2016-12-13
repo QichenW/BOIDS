@@ -49,6 +49,12 @@ private:
     void setUnitTravelDirection();
 
     bool isPreyDead;
+
+    void boidSeperation();
+
+    void boidAlignment();
+
+    void boidCohesion();
 };
 
 #endif //BOIDS_PREY_H

@@ -30,7 +30,7 @@ public:
     static void prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects);
 
 private:
-    static const char* BALL_OBJ_NAME;
+    static const char* CONE_OBJ_MAME;
 
     static const char *WALL_OBJ_NAME;
 };

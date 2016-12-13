@@ -54,7 +54,9 @@ GLuint SimpleObjLoader::loadObj(char *fileName, GLuint objNo, float scale, bool 
         if(isQuad) {
             if(hasVt && hasVn) {
                 recordObjectAsQuads();
-            } else {
+            } else if (hasVn){
+                recordObjectAsQuadsWithNoVt();
+            }else {
                 recordObjectAsQuadsWithNoVtNoVn();
             }
         } else {
@@ -139,6 +141,33 @@ void SimpleObjLoader::recordObjectAsQuads() {
             fscanf(filePointer, "%lu %c %lu %c %lu", &vIndex2, &dump1, &vtIndex, &dump2, &vnIndex);
             fscanf(filePointer, "%lu %c %lu %c %lu", &vIndex3, &dump1, &vtIndex, &dump2, &vnIndex);
             fscanf(filePointer, "%lu %c %lu %c %lu", &vIndex4, &dump1, &vtIndex, &dump2, &vnIndex);
+            glVertex3f(vx.at(vIndex1 - 1), vy.at(vIndex1 - 1), vz.at(vIndex1 - 1));
+            glVertex3f(vx.at(vIndex2 - 1), vy.at(vIndex2 - 1), vz.at(vIndex2 - 1));
+            glVertex3f(vx.at(vIndex3 - 1), vy.at(vIndex3 - 1), vz.at(vIndex3 - 1));
+            glVertex3f(vx.at(vIndex4 - 1), vy.at(vIndex4 - 1), vz.at(vIndex4 - 1));
+        }
+    }
+    glEnd();
+}
+
+/****
+ * This function can load a obj file with no texture vector, no normal vector and describing the object in triangles
+ */
+void SimpleObjLoader::recordObjectAsQuadsWithNoVt() {
+    char dump1, dump2;
+    unsigned long vIndex1, vIndex2, vIndex3, vIndex4, vtIndex, vnIndex;
+    glBegin(GL_QUADS);
+    while (true) {
+        // %s ignores /r /0 /n in between lines
+        if (fscanf(filePointer, "%s", firstWord) == EOF) {
+            break;
+        }
+        if (strcmp(firstWord, "f") == 0) {
+
+            fscanf(filePointer, "%lu %c %c %lu", &vIndex1, &dump1, &dump2, &vnIndex);
+            fscanf(filePointer, "%lu %c %c %lu", &vIndex2, &dump1, &dump2, &vnIndex);
+            fscanf(filePointer, "%lu %c %c %lu", &vIndex3, &dump1, &dump2, &vnIndex);
+            fscanf(filePointer, "%lu %c %c %lu", &vIndex4, &dump1, &dump2, &vnIndex);
             glVertex3f(vx.at(vIndex1 - 1), vy.at(vIndex1 - 1), vz.at(vIndex1 - 1));
             glVertex3f(vx.at(vIndex2 - 1), vy.at(vIndex2 - 1), vz.at(vIndex2 - 1));
             glVertex3f(vx.at(vIndex3 - 1), vy.at(vIndex3 - 1), vz.at(vIndex3 - 1));
