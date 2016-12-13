@@ -9,16 +9,16 @@
       <sourceFolder url="file://$MODULE_DIR$/src/setup/PhysicsSetupFileLoader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/setup/SimpleObjLoader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/DrawObjects.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/Geometry.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/Object.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/Geometry.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/DrawObjects.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/Ball.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/Ball.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/Object.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/CollisionDetector.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/physicsBased/CollisionDetector.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/DrawObjects.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/Geometry.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/Object.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/Geometry.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/DrawObjects.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/Prey.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/Prey.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/Object.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/CollisionDetector.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/CollisionDetector.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ui/UserInputManager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ui/UserInputManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ui/StringUtils.h" isTestSource="false" />

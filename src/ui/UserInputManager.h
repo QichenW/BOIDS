@@ -9,7 +9,7 @@
 #if defined(__APPLE__)
 #include <GLUT/glut.h>
 #include "setup/PhysicsPrefs.h"
-#include "physicsBased/DrawObjects.h"
+#include "boid/DrawObjects.h"
 
 #else
 #include <GL/glut.h>

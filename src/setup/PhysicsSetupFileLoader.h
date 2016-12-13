@@ -2,10 +2,10 @@
 // Created by Qichen on 11/13/16.
 //
 
-#ifndef BOUNCINGBALLS_PHYSICSSETUPFILELOADER_H
-#define BOUNCINGBALLS_PHYSICSSETUPFILELOADER_H
+#ifndef BOIDS_PHYSICSSETUPFILELOADER_H
+#define BOIDS_PHYSICSSETUPFILELOADER_H
 
-#include "physicsBased/Object.h"
+#include "boid/Object.h"
 #include "PhysicsPrefs.h"
 
 #if defined(__APPLE__)
@@ -22,4 +22,4 @@ public:
 };
 
 
-#endif //BOUNCINGBALLS_PHYSICSSETUPFILELOADER_H
+#endif //BOIDS_PHYSICSSETUPFILELOADER_H

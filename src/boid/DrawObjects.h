@@ -4,7 +4,7 @@
 
 #ifndef BOUNCINGBALLS_DRAWOBJECTS_H
 #define BOUNCINGBALLS_DRAWOBJECTS_H
-#include "Ball.h"
+#include "Prey.h"
 #include "Object.h"
 #include "setup/SimpleObjLoader.h"
 #include "matrix/RotationHelper.h"

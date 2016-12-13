@@ -4,7 +4,7 @@
 //  Copyright © 2016 Qichen Wang. All rights reserved.
 //
 
-#include "physicsBased/CollisionDetector.h"
+#include "boid/CollisionDetector.h"
 #include "UserInputManager.h"
 #include "StringUtils.h"
 
@@ -56,8 +56,7 @@ void drawFrame() {
     int i;
     CollisionDetector::detectAll(objects, prefs.numberOfObjects);
     for(i = 6; i <prefs.numberOfObjects; i++){
-        ((Ball *) objects[i])->forceStopIfSlowOnFloor();
-        ((Ball *) objects[i])->updateFlattenedTransformationMatrix(increment);
+        ((Prey *) objects[i])->updateFlattenedTransformationMatrix(increment);
     }
     DrawObjects::draw(objects);
 
@@ -90,7 +89,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(1280, 720);
     glutInitWindowPosition(100, 100);
-    window = glutCreateWindow("CSCI 6555 project 3 : Physics-Base Motion Control System");
+    window = glutCreateWindow("CSCI 6555 project 4 : BOIDS");
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
     glutIdleFunc(display);

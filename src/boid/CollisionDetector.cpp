@@ -17,9 +17,9 @@ const int CollisionDetector::Z_DIRECTION = 2;
  */
 void CollisionDetector::detectAll(Object **all, int numberOfObjects) {
     int i,j;
-    Ball * b1, * b2;
+    Prey * b1, * b2;
     for(i = NUMBER_OF_WALLS; i < numberOfObjects; i++){
-        b1 = (Ball *) all[i];
+        b1 = (Prey *) all[i];
         for (j = 0; j < i; j++){
             //detecting if collision with a wall
             if (all[j]->isFixed){
@@ -70,16 +70,16 @@ void CollisionDetector::detectAll(Object **all, int numberOfObjects) {
                 if(i == j) {
                     continue;
                 }
-                b2 = ((Ball *) all[j]);
+                b2 = ((Prey *) all[j]);
                 if(Geometry::getDistance(b1->getTranslation(), b2->getTranslation())
                         <= b1->radius +  b2->radius) {
                     applyConservationLawForVelos(b1, b2);
                     //Fake the rotation for either or both of them, if on the floor
-                    if(b1->getY() - Ball::BOTTOM_WALL_Y <= b1->radius){
+                    if(b1->getY() - Prey::BOTTOM_WALL_Y <= b1->radius){
                         // Hitting the floor only change the rotation about x and z axes
                         fakeTheRotation(b1, 1);
                     }
-                    if(b2->getY() - Ball::BOTTOM_WALL_Y <= b2->radius){
+                    if(b2->getY() - Prey::BOTTOM_WALL_Y <= b2->radius){
                         //Hitting the floor only change the rotation about x and z axes
                         fakeTheRotation(b2, 1);
                     }
@@ -93,7 +93,7 @@ void CollisionDetector::detectAll(Object **all, int numberOfObjects) {
  * @param b1 a ball
  * @param b2 another ball
  */
-void CollisionDetector::applyConservationLawForVelos(Ball *b1, Ball *b2) {
+void CollisionDetector::applyConservationLawForVelos(Prey *b1, Prey *b2) {
     //TODO fix this
     GLfloat unchangedPortion1[3], unchangedPortion2[3];
     GLfloat changingPortion1Before[3], changingPortion2Before[3];
@@ -147,7 +147,7 @@ void CollisionDetector::applyConservationLawForVelos(Ball *b1, Ball *b2) {
  * @param ball
  * @param hitInTheDirectionOfWhichAxe 0 - x/1 - y/ 2 - z
  */
-void CollisionDetector::fakeTheRotation(Ball *ball, int hitInTheDirectionOfWhichAxe) {
+void CollisionDetector::fakeTheRotation(Prey *ball, int hitInTheDirectionOfWhichAxe) {
     switch(hitInTheDirectionOfWhichAxe) {
         case 0:
             ball->angluarVelo[1] = -57 * ball->velocity[2] / ball->radius;

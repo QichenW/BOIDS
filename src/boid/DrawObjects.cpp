@@ -35,7 +35,7 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
     DrawObjects::numberOfObjects = pPrefs->numberOfObjects;
     unsigned long i;
     int j,k;
-    GLfloat defaultScale = 3.0, tempMass;
+    GLfloat defaultScale = 0.8, tempMass;
     vector<GLfloat *> orientations, positions, velocities, angularVelos;
 
     GLuint wallObjID = SimpleObjLoader::loadObj((char *) WALL_OBJ_NAME, 1, 1.0, true, false, false);
@@ -69,17 +69,17 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
         } else {
             tempMass = pPrefs->listOfMass.at(k - NUMBER_OF_WALLS);
             if(tempMass<1.48){
-                *(pObjects + k) = new Ball(k, sBallObjID, tempMass, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, sBallObjID, tempMass, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
-                                           (GLfloat) (2.4 * defaultScale)); //the radius of the ball in .obj file is 2.4
+                                           (GLfloat) (defaultScale)); //the radius of the ball in .obj file is 2.4
             } else if(tempMass < 1.98){
-                *(pObjects + k) = new Ball(k, mBallObjID, tempMass, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, mBallObjID, tempMass, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
-                                           (GLfloat) (2.4 * sqrtf(tempMass)*  defaultScale));
+                                           (GLfloat) (sqrtf(tempMass)*  defaultScale));
             } else {
-                *(pObjects + k) = new Ball(k, lBallObjID, tempMass, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, lBallObjID, tempMass, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
-                                           (GLfloat) (2.4 * sqrtf(tempMass)*  defaultScale));
+                                           (GLfloat) (sqrtf(tempMass)*  defaultScale));
             }
 
         }

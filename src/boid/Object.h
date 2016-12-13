@@ -33,8 +33,14 @@ public:
 
 
     bool isFixed;
+    bool isPredator;
     GLfloat mass;
-    static GLfloat BOTTOM_WALL_Y;
+    const static GLfloat BOTTOM_WALL_Y;
+    const static GLfloat TOP_WALL_Y;
+    const static GLfloat REAR_WALL_Z;
+    const static GLfloat NEAR_WALL_Z;
+    const static GLfloat LEFT_WALL_X;
+    const static GLfloat RIGHT_WALL_X;
 protected:
     int id;
     GLuint listId;

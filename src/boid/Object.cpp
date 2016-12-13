@@ -5,7 +5,12 @@
 #include "Object.h"
 
 
-GLfloat Object::BOTTOM_WALL_Y;
+const GLfloat Object::BOTTOM_WALL_Y = -50;
+const GLfloat Object::TOP_WALL_Y = 50;
+const GLfloat Object::LEFT_WALL_X = -50;
+const GLfloat Object::RIGHT_WALL_X = 50;
+const GLfloat Object::NEAR_WALL_Z = 50;
+const GLfloat Object::REAR_WALL_Z = -50;
 
 /***
  * Object is the base class of Ball; a wall is an instance of Object
@@ -15,11 +20,6 @@ Object::Object(int id, GLuint listId, GLfloat mass, bool isFixed, GLfloat *orien
     Object::listId = listId;
     Object::mass = mass;
     Object::isFixed = isFixed;
-
-    // set the bottom y of the space
-    if(id == 3){
-        BOTTOM_WALL_Y = *(translation + 1);
-    }
 
     int i;
     for (i = 0 ; i < 3; i++) {

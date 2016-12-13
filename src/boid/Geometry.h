@@ -6,7 +6,7 @@
 #define BOUNCINGBALLS_GEOMETRY_H
 
 #include "Object.h"
-#include "Ball.h"
+#include "Prey.h"
 #include "matrix/RotationHelper.h"
 #include <cmath>
 #if defined(__APPLE__)

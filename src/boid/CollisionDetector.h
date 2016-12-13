@@ -7,7 +7,7 @@
 
 
 #include "Object.h"
-#include "Ball.h"
+#include "Prey.h"
 #include "matrix/RotationHelper.h"
 #include "Geometry.h"
 #include <cmath>
@@ -30,9 +30,9 @@ public:
     static const int Z_DIRECTION;
     static const GLfloat ratio;
 
-    static void applyConservationLawForVelos(Ball *b1, Ball *b2);
+    static void applyConservationLawForVelos(Prey *b1, Prey *b2);
 
-    static void fakeTheRotation(Ball *ball, int hitInTheDirectionOfWhichAxe);
+    static void fakeTheRotation(Prey *ball, int hitInTheDirectionOfWhichAxe);
 
     static void reverseVelocity(GLfloat *veloInOneDirection);
 };

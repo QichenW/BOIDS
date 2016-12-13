@@ -8,11 +8,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES src/main.cpp src/setup/SimpleObjLoader.cpp src/setup/SimpleObjLoader.h
         src/ui/UserInputManager.cpp src/ui/UserInputManager.h src/ui/StringUtils.cpp src/ui/StringUtils.h
         src/setup/PhysicsPrefs.cpp src/setup/PhysicsPrefs.h src/setup/PhysicsSetupFileLoader.cpp
-        src/setup/PhysicsSetupFileLoader.h src/physicsBased/Object.cpp src/physicsBased/Object.h
-        src/physicsBased/Ball.cpp src/physicsBased/Ball.h src/physicsBased/DrawObjects.cpp
-        src/matrix/RotationHelper.cpp src/matrix/RotationHelper.h src/physicsBased/DrawObjects.h
-        src/physicsBased/CollisionDetector.cpp src/physicsBased/CollisionDetector.h
-        src/physicsBased/Geometry.cpp src/physicsBased/Geometry.h)
+        src/setup/PhysicsSetupFileLoader.h src/boid/Object.cpp src/boid/Object.h
+        src/boid/Prey.cpp src/boid/Prey.h src/boid/DrawObjects.cpp
+        src/matrix/RotationHelper.cpp src/matrix/RotationHelper.h src/boid/DrawObjects.h
+        src/boid/CollisionDetector.cpp src/boid/CollisionDetector.h
+        src/boid/Geometry.cpp src/boid/Geometry.h)
 
 #########################################################
 # Include Files
