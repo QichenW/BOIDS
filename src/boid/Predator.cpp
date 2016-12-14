@@ -19,9 +19,9 @@ const int Predator::Z_DIRECTION = 2;
  * @param angularVelocity - initial angular velocity
  * @param r - radius
  */
-Predator::Predator(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn,
+Predator::Predator(int oId, int lId, bool isF, GLfloat *orienttn,
            GLfloat *translatn, GLfloat * velocity, GLfloat * angularVelocity, GLfloat r)
-        :Object(oId, lId, om, isF, orienttn, translatn){ // call the base class constructor first
+        :Object(oId, lId, isF, orienttn, translatn){ // call the base class constructor first
     int i;
     radius = r;
     for (i = 0 ; i < 3; i++){

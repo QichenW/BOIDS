@@ -30,11 +30,11 @@ public:
     static const int Z_DIRECTION;
     static const GLfloat ratio;
 
-    static void applyConservationLawForVelos(Prey *b1, Prey *b2);
-
     static void fakeTheRotation(Prey *ball, int hitInTheDirectionOfWhichAxe);
 
     static void reverseVelocity(GLfloat *veloInOneDirection);
+
+    static void applyCollisionAvoidance(Prey *p1, Prey *p2);
 };
 
 

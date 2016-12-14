@@ -19,7 +19,7 @@
 class Predator: public Object {
 public:
 
-    Predator(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
+    Predator(int oId, int lId, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
          GLfloat *angularVelocity, GLfloat r);
 
     void updateAcclrtn();

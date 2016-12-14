@@ -73,7 +73,7 @@ void CollisionDetector::detectAll(Object **all, int numberOfObjects) {
                 b2 = ((Prey *) all[j]);
                 if(Geometry::getDistance(b1->getTranslation(), b2->getTranslation())
                         <= b1->radius +  b2->radius) {
-                    applyConservationLawForVelos(b1, b2);
+                    applyCollisionAvoidance(b1, b2);
                     //Fake the rotation for either or both of them, if on the floor
                     if(b1->getY() - Prey::BOTTOM_WALL_Y <= b1->radius){
                         // Hitting the floor only change the rotation about x and z axes
@@ -87,57 +87,6 @@ void CollisionDetector::detectAll(Object **all, int numberOfObjects) {
             }
         }
     }
-}
-/***
- * Hard coded laws of conservation (momentum & Kinetic energy) to update velocities
- * @param b1 a ball
- * @param b2 another ball
- */
-void CollisionDetector::applyConservationLawForVelos(Prey *b1, Prey *b2) {
-    //TODO fix this
-    GLfloat unchangedPortion1[3], unchangedPortion2[3];
-    GLfloat changingPortion1Before[3], changingPortion2Before[3];
-    GLfloat changingPortion1After[3], changingPortion2After[3];
-    GLfloat momentum[3], energy[3];
-
-    Geometry::getDirectionOfCollision(b1->directionOfCollision,b2->directionOfCollision,
-                                      b1->getTranslation(), b2->getTranslation());
-    //Find the portion of velocity to be changed according to law of conservation
-    Geometry::getProjection(changingPortion1Before, b1->velocity, b1->directionOfCollision);
-    Geometry::getProjection(changingPortion2Before, b2->velocity, b2->directionOfCollision);
-    //get the unchanging portion
-    int i;
-    for(i = 0; i < 3; i++){
-        unchangedPortion1[i] = b1->velocity[i] - changingPortion1Before[i];
-        unchangedPortion2[i] = b2->velocity[i] - changingPortion2Before[i];
-
-        momentum[i] = changingPortion1Before[i] * b1->mass + changingPortion2Before[i] * b2->mass;
-        energy[i] = (GLfloat) (0.5 * powf(changingPortion1Before[i], 2) * b1->mass +
-                        0.5 * powf(changingPortion2Before[i],2)* b2->mass);
-    }
-    // a, b, c as in ax^2 +bx + c = 0
-    GLfloat a,b,c, delta,result1, result2, m1tom2Ratio = b1->mass/b2->mass;
-    a = b1->mass/2 * (1+m1tom2Ratio);
-    //slove for new vx,vy,vz, and assign new velocities to balls
-    for(i = 0; i < 3; i++){
-        b = -1 * m1tom2Ratio * momentum[i];
-        c = (GLfloat) (1.0 / 2.0 / b2->mass * powf(momentum[i], 2) - energy[i]);
-        delta = powf(b,2) -4 * a * c;
-        if(delta < 0){
-            //TODO throw exception
-            cout<< "b^2 - 4ac < 0"<<endl;
-        }
-        result1 = (-1 * b + sqrtf(delta))/2/a;
-        result2 = (-1 * b - sqrtf(delta))/2/a;
-
-        changingPortion1After[i] = (fabs(result1 - changingPortion1Before[i])
-                                    > fabs(result2 - changingPortion1Before[i])) ? result1 :result2;
-        changingPortion2After[i] = (momentum[i] - b1->mass * changingPortion1After[i])/ b2->mass;
-
-        b1->velocity[i] = unchangedPortion1[i] + changingPortion1After[i];
-        b2->velocity[i] = unchangedPortion2[i] + changingPortion2After[i];
-    }
-
 }
 
 /***
@@ -185,4 +134,13 @@ void CollisionDetector::reverseVelocity(GLfloat *veloInOneDirection){
         r = 0;
     }
     *veloInOneDirection *= -1*r;
+}
+
+/**
+ * when two boids are too close, apply collision avoidance behaviours
+ * @param p1
+ * @param p2
+ */
+void CollisionDetector::applyCollisionAvoidance(Prey *p1, Prey *p2) {
+//TODO implement this
 }

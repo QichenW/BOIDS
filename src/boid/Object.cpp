@@ -15,10 +15,9 @@ const GLfloat Object::REAR_WALL_Z = -50;
 /***
  * Object is the base class of Ball; a wall is an instance of Object
  */
-Object::Object(int id, GLuint listId, GLfloat mass, bool isFixed, GLfloat *orientation, GLfloat *translation) {
+Object::Object(int id, GLuint listId, bool isFixed, GLfloat *orientation, GLfloat *translation) {
     Object::id = id;
     Object::listId = listId;
-    Object::mass = mass;
     Object::isFixed = isFixed;
 
     int i;

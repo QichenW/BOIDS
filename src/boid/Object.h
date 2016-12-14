@@ -15,7 +15,7 @@
 
 class Object {
 public:
-    Object(int id, GLuint listId, GLfloat mass, bool isFixed, GLfloat *orientation, GLfloat *translation);
+    Object(int id, GLuint listId, bool isFixed, GLfloat *orientation, GLfloat *translation);
 
     void setFlattenedTransformationMatrix(GLfloat *flattenedTransformationMatrix);
 
@@ -34,7 +34,6 @@ public:
 
     bool isFixed;
     bool isPredator;
-    GLfloat mass;
     const static GLfloat BOTTOM_WALL_Y;
     const static GLfloat TOP_WALL_Y;
     const static GLfloat REAR_WALL_Z;

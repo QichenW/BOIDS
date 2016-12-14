@@ -37,7 +37,7 @@ public:
     vector<GLfloat*> listOfPositions;
     vector<GLfloat*> listOfVelocity;
     vector<GLfloat*> listOfAngularVelo;
-    vector<GLfloat> listOfMass;
+    vector<GLfloat> listOfSphereRadius;
 
     void setNumberOfObjects(int i);
 
@@ -49,7 +49,7 @@ public:
 
     void addOneAngularVelo(GLfloat *oneAngularVelo);
 
-    void addOneBallMass(GLfloat m);
+    void addOneSphereRadius(GLfloat m);
 };
 
 

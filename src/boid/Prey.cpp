@@ -18,9 +18,9 @@ const int Prey::Z_DIRECTION = 2;
  * @param angularVelocity - initial angular velocity
  * @param r - radius
  */
-Prey::Prey(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn,
+Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
      GLfloat *translatn, GLfloat * velocity, GLfloat * angularVelocity, GLfloat r)
-        :Object(oId, lId, om, isF, orienttn, translatn){ // call the base class constructor first
+        :Object(oId, lId, isF, orienttn, translatn){ // call the base class constructor first
     int i;
     radius = r;
     for (i = 0 ; i < 3; i++){
@@ -73,7 +73,7 @@ GLfloat Prey::getVelocityIn(const int direction) {
 }
 
 /***
- * set unit travel direction, which is used to determine the acceleration caused by friction.
+ * set unit travel direction, which is used to determine the heading of boids.
  */
 void Prey::setUnitTravelDirection() {
     Geometry::getUnitDirection(unitTravelDirection, velocity);

@@ -19,7 +19,7 @@
 class Prey: public Object {
 public:
 
-    Prey(int oId, int lId, GLfloat om, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
+    Prey(int oId, int lId, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
              GLfloat *angularVelocity, GLfloat r);
 
     void updateAcclrtn();

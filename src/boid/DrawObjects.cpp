@@ -35,16 +35,16 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
     DrawObjects::numberOfObjects = pPrefs->numberOfObjects;
     unsigned long i;
     int j,k;
-    GLfloat defaultScale = 0.8, tempMass;
+    GLfloat defaultScale = 2.6, tempRadius;
     vector<GLfloat *> orientations, positions, velocities, angularVelos;
 
     GLuint wallObjID = SimpleObjLoader::loadObj((char *) WALL_OBJ_NAME, 1, 1.0, true, false, false);
 
-    GLuint sBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, defaultScale, true, false, true);
+    GLuint sBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 1, true, false, true);
 
-    GLuint mBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, sqrtf(1.5)*defaultScale, true, false, true);
+    GLuint mBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 1.5, true, false, true);
 
-    GLuint lBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, sqrtf(2.0)*defaultScale, true, false, true);
+    GLuint lBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 2.0, true, false, true);
 
     orientations = pPrefs->listOfEulerAngle;
     positions = pPrefs->listOfPositions;
@@ -65,21 +65,21 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
 
     for (k = 0; k < numberOfObjects; k++){
         if(k < NUMBER_OF_WALLS){
-            *(pObjects + k) = new Object(k,wallObjID, 0, true, orientations.at(k), positions.at(k));
+            *(pObjects + k) = new Object(k,wallObjID, true, orientations.at(k), positions.at(k));
         } else {
-            tempMass = pPrefs->listOfMass.at(k - NUMBER_OF_WALLS);
-            if(tempMass<1.48){
-                *(pObjects + k) = new Prey(k, sBoidID, tempMass, false, orientations.at(k), positions.at(k),
+            tempRadius = pPrefs->listOfSphereRadius.at(k - NUMBER_OF_WALLS);
+            if(tempRadius<1.48){
+                *(pObjects + k) = new Prey(k, sBoidID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
-                                           (GLfloat) (defaultScale)); //the radius of the ball in .obj file is 2.4
-            } else if(tempMass < 1.98){
-                *(pObjects + k) = new Prey(k, mBoidID, tempMass, false, orientations.at(k), positions.at(k),
+                                          defaultScale * tempRadius); //the radius of the ball in .obj file is 2.4
+            } else if(tempRadius < 1.98){
+                *(pObjects + k) = new Prey(k, mBoidID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
-                                           (GLfloat) (sqrtf(tempMass)*  defaultScale));
+                                           defaultScale * tempRadius);
             } else {
-                *(pObjects + k) = new Prey(k, lBoidID, tempMass, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, lBoidID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
-                                           (GLfloat) (sqrtf(tempMass)*  defaultScale));
+                                           defaultScale *tempRadius);
             }
 
         }
