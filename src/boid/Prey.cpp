@@ -5,6 +5,7 @@
 const int Prey::X_DIRECTION = 0;
 const int Prey::Y_DIRECTION = 1;
 const int Prey::Z_DIRECTION = 2;
+const GLfloat Prey::VELOCITY_CONSTANT = 10;
 
 /**
  *  Prey is a subclass of Object
@@ -24,14 +25,12 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
     int i;
     radius = r;
     for (i = 0 ; i < 3; i++){
-        *(acceleration + i) = 0;
         *(Prey::velocity + i) = *(velocity + i);
-        *(Prey::angluarVelo + i) = *(angularVelocity + i);
-        *(angularAcclrtn + i) = 0;
         *(directionOfCollision + i) = 0;
     }
     isPreyDead = false;
     isPredator = false;
+    detour = false;
     setUnitTravelDirection();
 }
 
@@ -41,18 +40,14 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
  */
 void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
     setUnitTravelDirection();
-    updateAcclrtn();
     int i;
     for (i = 0 ; i < 3; i++){
         *(translation + i) += *(velocity + i) * t;
-        *(velocity + i) += *(acceleration + i) * t;
-
-        *(orientation + i) += *(angluarVelo + i) * t;
-        *(angluarVelo + i) += *(angularAcclrtn + i) * t;
     }
-
-    setFlattenedTransformationMatrix(RotationHelper::
-                                     generateFlattenedTransformationMatrix(orientation,translation,false));
+    //TODO test this
+    flattenedTransformationMatrix[12] = translation[0];
+    flattenedTransformationMatrix[13] = translation[1];
+    flattenedTransformationMatrix[14] = translation[2];
 }
 
 /**
@@ -77,14 +72,6 @@ GLfloat Prey::getVelocityIn(const int direction) {
  */
 void Prey::setUnitTravelDirection() {
     Geometry::getUnitDirection(unitTravelDirection, velocity);
-}
-
-/**
- * update the acceleration for every time instance, if ball is in the air, it has g, if not in the air, it has
- * acceleration caused by friction
- */
-void Prey::updateAcclrtn() {
- //TODO how to update acceleration
 }
 
 /**
@@ -114,4 +101,17 @@ void Prey::boidAlignment(){
  */
 void Prey::boidCohesion(){
     //TODO
+}
+
+void Prey::setVelocity(GLfloat *v) {
+    //TODO test this
+    int i;
+    for(i = 0; i < 3; i++){
+        velocity[i] = *(v + i);
+    }
+}
+
+void Prey::hasDetour(bool i) {
+    detour = i;
+
 }

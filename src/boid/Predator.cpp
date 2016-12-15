@@ -6,6 +6,7 @@
 const int Predator::X_DIRECTION = 0;
 const int Predator::Y_DIRECTION = 1;
 const int Predator::Z_DIRECTION = 2;
+const GLfloat Predator:: VELOCITY_CONSTANT= 15;
 
 /**
  *  Prey is a subclass of Object

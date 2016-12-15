@@ -46,6 +46,7 @@ private:
     static const int X_DIRECTION;
     static const int Y_DIRECTION;
     static const int Z_DIRECTION;
+    static const GLfloat VELOCITY_CONSTANT;
 
     void setUnitTravelDirection();
 

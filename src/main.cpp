@@ -12,7 +12,7 @@ using namespace std;
 
 Object *objects[50];
 PhysicsPrefs prefs;
-GLfloat increment = 0.05;
+GLfloat increment = 0.03;
 int window;
 
 void drawFrame();
@@ -50,7 +50,7 @@ void drawFrame() {
     glLoadIdentity();
     glPushMatrix();
     //move the model view away from the camera, so that we are not inside the object
-//    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-150,1});
+//    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-50,1});
     glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
     glColor3f(0.1, 0.45, 0.1);
     int i;
