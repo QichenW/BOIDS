@@ -12,7 +12,6 @@ const GLfloat Predator:: VELOCITY_CONSTANT= 15;
  *  Prey is a subclass of Object
  * @param oId - id
  * @param lId - polygon list id
- * @param om - mass
  * @param isF - is fixed (should be false)
  * @param orienttn - initial orientation
  * @param translatn - initial translation
@@ -29,7 +28,6 @@ Predator::Predator(int oId, int lId, bool isF, GLfloat *orienttn,
         *(acceleration + i) = 0;
         *(Predator::velocity + i) = *(velocity + i);
         *(Predator::angluarVelo + i) = *(angularVelocity + i);
-        *(angularAcclrtn + i) = 0;
         *(directionOfCollision + i) = 0;
     }
     setUnitTravelDirection();
@@ -49,7 +47,6 @@ void Predator::updateFlattenedTransformationMatrix(GLfloat t) {
         *(velocity + i) += *(acceleration + i) * t;
 
         *(orientation + i) += *(angluarVelo + i) * t;
-        *(angluarVelo + i) += *(angularAcclrtn + i) * t;
     }
 
     setFlattenedTransformationMatrix(RotationHelper::

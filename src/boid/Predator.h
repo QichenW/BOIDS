@@ -39,8 +39,6 @@ public:
 private:
 
     GLfloat acceleration[3];
-    GLfloat angularAcclrtn[3];
-    //TODO this is not useful
     GLfloat unitTravelDirection[3];
 
     static const int X_DIRECTION;

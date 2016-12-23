@@ -24,8 +24,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Object.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Object.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Geometry.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/boid/CollisionDetector.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/boid/CollisionDetector.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/BoundaryDetector.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/boid/BoundaryDetector.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Prey.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nfd/nfd_common.c" isTestSource="false" />

@@ -70,15 +70,15 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
             tempRadius = pPrefs->listOfSphereRadius.at(k - NUMBER_OF_WALLS);
             if(tempRadius<1.48){
                 *(pObjects + k) = new Prey(k, sBoidID, false, orientations.at(k), positions.at(k),
-                                           velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
+                                           velocities .at(k - NUMBER_OF_WALLS),
                                           defaultScale * tempRadius); //the radius of the ball in .obj file is 2.4
             } else if(tempRadius < 1.98){
                 *(pObjects + k) = new Prey(k, mBoidID, false, orientations.at(k), positions.at(k),
-                                           velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
+                                           velocities .at(k - NUMBER_OF_WALLS),
                                            defaultScale * tempRadius);
             } else {
                 *(pObjects + k) = new Prey(k, lBoidID, false, orientations.at(k), positions.at(k),
-                                           velocities .at(k - NUMBER_OF_WALLS), angularVelos.at(k- NUMBER_OF_WALLS),
+                                           velocities .at(k - NUMBER_OF_WALLS),
                                            defaultScale *tempRadius);
             }
 

@@ -11,7 +11,7 @@ set(SOURCE_FILES src/main.cpp src/setup/SimpleObjLoader.cpp src/setup/SimpleObjL
         src/setup/PhysicsSetupFileLoader.h src/boid/Object.cpp src/boid/Object.h
         src/boid/Prey.cpp src/boid/Prey.h src/boid/DrawObjects.cpp
         src/matrix/RotationHelper.cpp src/matrix/RotationHelper.h src/boid/DrawObjects.h
-        src/boid/CollisionDetector.cpp src/boid/CollisionDetector.h
+        src/boid/BoundaryDetector.cpp src/boid/BoundaryDetector.h
         src/boid/Geometry.cpp src/boid/Geometry.h src/boid/Predator.cpp src/boid/Predator.h)
 
 #########################################################

@@ -2,8 +2,8 @@
 // Created by Qichen on 11/12/16.
 //
 
-#ifndef BOUNCINGBALLS_COLLISIONDETECTOR_H
-#define BOUNCINGBALLS_COLLISIONDETECTOR_H
+#ifndef BOIDS_BOUNDARYDETECTOR_H
+#define BOIDS_BOUNDARYDETECTOR_H
 
 
 #include "Object.h"
@@ -20,22 +20,15 @@
 #include <GL/glut.h>
 #endif
 using namespace std;
-class CollisionDetector {
+class BoundaryDetector {
 public:
     static void detectAll(Object **all, int numberOfObjects);
     static const int NUMBER_OF_WALLS;
-
     static const int X_DIRECTION;
     static const int Y_DIRECTION;
     static const int Z_DIRECTION;
-    static const GLfloat ratio;
-
-    static void fakeTheRotation(Prey *ball, int hitInTheDirectionOfWhichAxe);
-
-    static void reverseVelocity(GLfloat *veloInOneDirection);
-
-    static void applyCollisionAvoidance(Prey *p1, Prey *p2);
+    static void halt(GLfloat *veloOneDir, GLfloat *acclrtnOneDir);
 };
 
 
-#endif //BOUNCINGBALLS_COLLISIONDETECTOR_H
+#endif //BOIDS_BOUNDARYDETECTOR_H
