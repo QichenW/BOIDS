@@ -36,7 +36,7 @@ public:
     static const GLfloat VELOCITY_CONSTANT;
     GLfloat unitTravelDirection[3];
 
-    void getCombinedDesires(Object **objects, int numberOfObjects);
+    void getCombinedDesires(int numberOfObjects);
 
     vector<Prey *> vectorOfNeighbours;
 private:

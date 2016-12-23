@@ -16,15 +16,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cdfceccd-108c-4504-a21c-1581db8718bd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/DrawObjects.h" afterPath="$PROJECT_DIR$/src/boid/DrawObjects.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/Object.h" afterPath="$PROJECT_DIR$/src/boid/Object.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/Prey.cpp" afterPath="$PROJECT_DIR$/src/boid/Prey.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/Prey.h" afterPath="$PROJECT_DIR$/src/boid/Prey.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/matrix/RotationHelper.cpp" afterPath="$PROJECT_DIR$/src/matrix/RotationHelper.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/matrix/RotationHelper.h" afterPath="$PROJECT_DIR$/src/matrix/RotationHelper.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/StringUtils.h" afterPath="$PROJECT_DIR$/src/ui/StringUtils.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/UserInputManager.h" afterPath="$PROJECT_DIR$/src/ui/UserInputManager.h" />
     </list>
     <ignored path="BOIDS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,6 +83,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="StringUtils.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/StringUtils.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -101,49 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Prey.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/boid/Prey.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-119">
-              <caret line="128" column="65" selection-start-line="128" selection-start-column="65" selection-end-line="128" selection-end-column="65" />
-              <folding>
-                <marker date="1482494540000" expanded="true" signature="2746:4176" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserInputManager.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/UserInputManager.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding>
-                <element signature="e#138#160#0" expanded="true" />
-                <element signature="e#230#250#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VectorCalculation.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/matrix/VectorCalculation.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-              <folding>
-                <element signature="e#110#134#0" expanded="true" />
-                <element signature="e#264#284#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Prey.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/boid/Prey.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="570">
+              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
               <folding>
                 <element signature="e#104#123#0" expanded="true" />
               </folding>
@@ -151,13 +117,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RotationHelper.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/matrix/RotationHelper.h">
+      <file leaf-file-name="Prey.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/boid/Prey.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
+            <state relative-caret-position="1620">
+              <caret line="108" column="43" selection-start-line="108" selection-start-column="43" selection-end-line="108" selection-end-column="43" />
               <folding>
-                <element signature="e#120#137#0" expanded="true" />
+                <marker date="1482495013000" expanded="true" signature="2728:3745" ph="..." />
               </folding>
             </state>
           </provider>
@@ -194,13 +160,13 @@
         <option value="$PROJECT_DIR$/src/matrix/VectorCalculation.h" />
         <option value="$PROJECT_DIR$/src/matrix/VectorCalculation.cpp" />
         <option value="$PROJECT_DIR$/src/matrix/RotationHelper.cpp" />
-        <option value="$PROJECT_DIR$/src/boid/Prey.h" />
-        <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/src/matrix/RotationHelper.h" />
         <option value="$PROJECT_DIR$/src/boid/Object.h" />
         <option value="$PROJECT_DIR$/src/boid/DrawObjects.h" />
         <option value="$PROJECT_DIR$/src/ui/StringUtils.h" />
         <option value="$PROJECT_DIR$/src/ui/UserInputManager.h" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/src/boid/Prey.h" />
         <option value="$PROJECT_DIR$/src/boid/Prey.cpp" />
       </list>
     </option>
@@ -213,7 +179,7 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-23" />
+    <option name="x" value="237" />
     <option name="y" value="27" />
     <option name="width" value="1463" />
     <option name="height" value="1053" />
@@ -564,7 +530,7 @@
       <workItem from="1481740172482" duration="30409000" />
       <workItem from="1482368450544" duration="1138000" />
       <workItem from="1482464932192" duration="5177000" />
-      <workItem from="1482484206518" duration="9973000" />
+      <workItem from="1482484206518" duration="10463000" />
     </task>
     <task id="LOCAL-00001" summary="second">
       <created>1481606037645</created>
@@ -622,11 +588,18 @@
       <option name="project" value="LOCAL" />
       <updated>1482491332909</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="code trimmed">
+      <created>1482494612608</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1482494612608</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75082000" />
+    <option name="totallyTimeSpent" value="75572000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -638,7 +611,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-23" y="27" width="1463" height="1053" extended-state="0" />
+    <frame x="237" y="27" width="1463" height="1053" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15117891" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -765,7 +738,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1482494540000" expanded="true" signature="2746:4176" ph="..." />
+            <marker date="1482495013000" expanded="true" signature="2728:3745" ph="..." />
           </folding>
         </state>
       </provider>
@@ -980,14 +953,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-239">
-          <caret line="56" column="63" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/matrix/RotationHelper.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1083,10 +1048,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/boid/Prey.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="570">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
           <folding>
             <element signature="e#104#123#0" expanded="true" />
           </folding>
@@ -1095,10 +1068,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/boid/Prey.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="128" column="65" selection-start-line="128" selection-start-column="65" selection-end-line="128" selection-end-column="65" />
+        <state relative-caret-position="1620">
+          <caret line="108" column="43" selection-start-line="108" selection-start-column="43" selection-end-line="108" selection-end-column="43" />
           <folding>
-            <marker date="1482494540000" expanded="true" signature="2746:4176" ph="..." />
+            <marker date="1482495013000" expanded="true" signature="2728:3745" ph="..." />
           </folding>
         </state>
       </provider>

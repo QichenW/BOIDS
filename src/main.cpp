@@ -56,7 +56,7 @@ void drawFrame() {
     int i;
     BoundaryDetector::detectAll(objects, prefs.numberOfObjects);
     for(i = 6; i <prefs.numberOfObjects; i++){
-        ((Prey *) objects[i])->getCombinedDesires(objects, prefs.numberOfObjects);
+        ((Prey *) objects[i])->getCombinedDesires(prefs.numberOfObjects);
         ((Prey *) objects[i])->updateFlattenedTransformationMatrix(increment);
     }
     DrawObjects::draw(objects);

@@ -98,42 +98,27 @@ void Prey::setAcclrtnWithDesires(){
 }
 
 //TODO change this function - get combinded desires
-void Prey::getCombinedDesires(Object **objects, int numberOfObjects) {
-    int i;
+void Prey::getCombinedDesires(int numberOfObjects) {
     unsigned long j;
-    Prey * currentPrey;
-    for(i = 0; i < numberOfObjects; i++){
-        if( objects[i] ->isFixed){
-            continue;
-        } else if( objects[i]->isPredator){
-            continue;
-        }
-        currentPrey = (Prey *) objects[i];
-        int noOfNeighbours = (int) currentPrey->vectorOfNeighbours.size();
-        if(noOfNeighbours == 0){
-            continue;
-        }
+    int noOfNeighbours = (int) vectorOfNeighbours.size();
         // alignment, cohesion
         GLfloat alignmentDesire[3]={}, magnitudeA = 0;
         GLfloat cohesionDesire[3]={}, magnitudeC = 0;
         //TODO determine the separation desire and its magnitude
         GLfloat separationDesire[3]={}, magnitudeS = 0;
         for(j = 0; j < noOfNeighbours; j++){
-            cohesionDesire[0] += currentPrey->vectorOfNeighbours.at(j)->translation[0];
-            cohesionDesire[1] += currentPrey->vectorOfNeighbours.at(j)->translation[1];
-            cohesionDesire[2] += currentPrey->vectorOfNeighbours.at(j)->translation[2];
-            alignmentDesire[0] += currentPrey->vectorOfNeighbours.at(j)->velocity[0];
-            alignmentDesire[1] += currentPrey->vectorOfNeighbours.at(j)->velocity[1];
-            alignmentDesire[2] += currentPrey->vectorOfNeighbours.at(j)->velocity[2];
+            cohesionDesire[0] += vectorOfNeighbours.at(j)->translation[0];
+            cohesionDesire[1] += vectorOfNeighbours.at(j)->translation[1];
+            cohesionDesire[2] += vectorOfNeighbours.at(j)->translation[2];
+            alignmentDesire[0] += vectorOfNeighbours.at(j)->velocity[0];
+            alignmentDesire[1] += vectorOfNeighbours.at(j)->velocity[1];
+            alignmentDesire[2] += vectorOfNeighbours.at(j)->velocity[2];
         }
         magnitudeA = VectorCalculation::getMagnitude(alignmentDesire);
         for (j = 0; j <3 ; j++) {
             alignmentDesire[j] *= VELOCITY_CONSTANT/magnitudeA;
         }
         //TODO combine all desires
-
-    }
-
 }
 
 /**
