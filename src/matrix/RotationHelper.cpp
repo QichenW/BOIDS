@@ -3,12 +3,6 @@
 //
 
 #include "RotationHelper.h"
-/* sine cosine */
-#include <math.h>
-#include <algorithm>
-
-#include <iostream>
-using namespace std;
 
 static float transformationMatrix[4][4] ={};
 static float flattenedTransformationMatrix[16] ={};

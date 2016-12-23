@@ -2,8 +2,8 @@
 // Created by Qichen on 11/12/16.
 //
 
-#ifndef BOUNCINGBALLS_DRAWOBJECTS_H
-#define BOUNCINGBALLS_DRAWOBJECTS_H
+#ifndef BOIDS_DRAWOBJECTS_H
+#define BOIDS_DRAWOBJECTS_H
 #include "Prey.h"
 #include "Object.h"
 #include "setup/SimpleObjLoader.h"
@@ -36,4 +36,4 @@ private:
 };
 
 
-#endif //BOUNCINGBALLS_DRAWOBJECTS_H
+#endif //BOIDS_DRAWOBJECTS_H

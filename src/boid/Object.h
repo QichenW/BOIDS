@@ -2,8 +2,8 @@
 // Created by Qichen on 11/12/16.
 //
 
-#ifndef BOUNCINGBALLS_OBJECT_H
-#define BOUNCINGBALLS_OBJECT_H
+#ifndef BOIDS_OBJECT_H
+#define BOIDS_OBJECT_H
 #include "matrix/RotationHelper.h"
 #if defined(__APPLE__)
 #include <GLUT/glut.h>
@@ -50,4 +50,4 @@ protected:
 };
 
 
-#endif //BOUNCINGBALLS_OBJECT_H
+#endif //BOIDS_OBJECT_H

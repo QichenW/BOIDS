@@ -2,8 +2,8 @@
 // Created by Qichen on 9/24/16.
 //
 
-#ifndef BOUNCINGBALLS_USERINTERFACEMANAGER_H
-#define BOUNCINGBALLS_USERINTERFACEMANAGER_H
+#ifndef BOIDS_STRINGUTILS_H
+#define BOIDS_STRINGUTILS_H
 
 // glut
 #if defined(__APPLE__)
@@ -25,4 +25,4 @@ private:
 };
 
 
-#endif //BOUNCINGBALLS_USERINTERFACEMANAGER_H
+#endif //BOIDS_STRINGUTILS_H

@@ -40,7 +40,6 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
  * @param t - delta t
  */
 void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
-    setUnitTravelDirection();
     int i;
     for (i = 0 ; i < 3; i++){
         *(translation + i) += *(velocity + i) * t;
@@ -52,6 +51,10 @@ void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
         *(velocity + i) *= VELOCITY_CONSTANT;
         flattenedTransformationMatrix[12 + i] = translation[i];
     }
+    // rotate body by referring to old travel direction and new velocity
+    rotateBody(velocity);
+    // update travel direction
+    setUnitTravelDirection();
 }
 
 /**
@@ -90,20 +93,12 @@ void Prey::fall() {
 /**
  * get the combined desire as acceleration
  */
-void Prey::getDesires(){
+void Prey::setAcclrtnWithDesires(){
     //TODO
 }
 
-void Prey::setVelocity(GLfloat *v) {
-    //TODO test this
-    int i;
-    for(i = 0; i < 3; i++){
-        velocity[i] = *(v + i);
-    }
-}
-
 //TODO change this function - get combinded desires
-void Prey::rotateVelo(Object **objects, int numberOfObjects) {
+void Prey::getCombinedDesires(Object **objects, int numberOfObjects) {
     int i;
     unsigned long j;
     Prey * currentPrey;
@@ -119,29 +114,42 @@ void Prey::rotateVelo(Object **objects, int numberOfObjects) {
             continue;
         }
         // alignment, cohesion
-        GLfloat tempVelo[3]={}, magnitude_tempVelo = 0;
-        GLfloat tempCenter[3]={}, magnitude_tempCenter = 0;
+        GLfloat alignmentDesire[3]={}, magnitudeA = 0;
+        GLfloat cohesionDesire[3]={}, magnitudeC = 0;
+        //TODO determine the separation desire and its magnitude
+        GLfloat separationDesire[3]={}, magnitudeS = 0;
         for(j = 0; j < noOfNeighbours; j++){
-            tempCenter[0] += currentPrey->vectorOfNeighbours.at(j)->translation[0];
-            tempCenter[1] += currentPrey->vectorOfNeighbours.at(j)->translation[1];
-            tempCenter[2] += currentPrey->vectorOfNeighbours.at(j)->translation[2];
-            tempVelo[0] += currentPrey->vectorOfNeighbours.at(j)->velocity[0];
-            tempVelo[1] += currentPrey->vectorOfNeighbours.at(j)->velocity[1];
-            tempVelo[2] += currentPrey->vectorOfNeighbours.at(j)->velocity[2];
+            cohesionDesire[0] += currentPrey->vectorOfNeighbours.at(j)->translation[0];
+            cohesionDesire[1] += currentPrey->vectorOfNeighbours.at(j)->translation[1];
+            cohesionDesire[2] += currentPrey->vectorOfNeighbours.at(j)->translation[2];
+            alignmentDesire[0] += currentPrey->vectorOfNeighbours.at(j)->velocity[0];
+            alignmentDesire[1] += currentPrey->vectorOfNeighbours.at(j)->velocity[1];
+            alignmentDesire[2] += currentPrey->vectorOfNeighbours.at(j)->velocity[2];
         }
-        magnitude_tempVelo = sqrtf((float) (pow(tempVelo[0], 2) + pow(tempVelo[1], 2) + pow(tempVelo[2], 2)));
+        magnitudeA = VectorCalculation::getMagnitude(alignmentDesire);
         for (j = 0; j <3 ; j++) {
-            tempVelo[j] *= VELOCITY_CONSTANT/magnitude_tempVelo;
+            alignmentDesire[j] *= VELOCITY_CONSTANT/magnitudeA;
         }
-        //TODO test this
-        GLfloat axis_q[3] = {};
-        VectorCalculation::getCrossProduct(axis_q, currentPrey->unitTravelDirection, tempVelo);
-        GLfloat magnitude_axis = VectorCalculation::getMagnitude(axis_q);
-        GLfloat halfAngle;
-        if(magnitude_axis == 0) {
+        //TODO combine all desires
+
+    }
+
+}
+
+/**
+ * rotate the body to new orientation that is determined by new velocity
+ * @param newVelo
+ */
+void Prey::rotateBody(GLfloat *newVelo) {
+    int j;
+    GLfloat axis_q[3] = {};
+    VectorCalculation::getCrossProduct(axis_q, unitTravelDirection, newVelo);
+    GLfloat magnitude_axis = VectorCalculation::getMagnitude(axis_q);
+    GLfloat halfAngle;
+    if(magnitude_axis == 0) {
             //if the two vectors are in same direction, no needs to detour
-            if(VectorCalculation::areTwoVectorSameDirection(tempVelo, currentPrey->unitTravelDirection)){
-                continue;
+            if(VectorCalculation::areTwoVectorSameDirection(newVelo, unitTravelDirection)){
+                return;
             }
             // if the two vectors are opposite
             axis_q[0] = 0; axis_q[2] = 0; axis_q[1] = 1;
@@ -155,14 +163,9 @@ void Prey::rotateVelo(Object **objects, int numberOfObjects) {
             halfAngle = asinf(sinValue2) / 2;
 
         }
-        GLfloat quatForAlignment[4] ={cosf(halfAngle), sinf(halfAngle) * axis_q[0],sinf(halfAngle) * axis_q[1],
+    GLfloat quatForAlignment[4] ={cosf(halfAngle), sinf(halfAngle) * axis_q[0],sinf(halfAngle) * axis_q[1],
                                          sinf(halfAngle) * axis_q[2]};
-        //TODO this function is tested
-        currentPrey->setFlattenedTransformationMatrix(RotationHelper::updateFlattenedMatrixWithQuaternion(
-                currentPrey->getFlattenedTransformationMatrix(),quatForAlignment));
-        //TODO deal with tempCenter later
-        currentPrey->setVelocity(tempVelo);
-
-    }
-
+    //TODO this function is tested
+    setFlattenedTransformationMatrix(RotationHelper::updateFlattenedMatrixWithQuaternion(
+                getFlattenedTransformationMatrix(),quatForAlignment));
 }

@@ -55,8 +55,8 @@ void drawFrame() {
     glColor3f(0.1, 0.45, 0.1);
     int i;
     BoundaryDetector::detectAll(objects, prefs.numberOfObjects);
-    Prey::rotateVelo(objects, prefs.numberOfObjects);
     for(i = 6; i <prefs.numberOfObjects; i++){
+        ((Prey *) objects[i])->getCombinedDesires(objects, prefs.numberOfObjects);
         ((Prey *) objects[i])->updateFlattenedTransformationMatrix(increment);
     }
     DrawObjects::draw(objects);

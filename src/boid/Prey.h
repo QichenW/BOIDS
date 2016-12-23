@@ -34,10 +34,9 @@ public:
     GLfloat acclrtn[3];
     void fall();
     static const GLfloat VELOCITY_CONSTANT;
-    void setVelocity(GLfloat *v);
     GLfloat unitTravelDirection[3];
 
-    static void rotateVelo(Object **objects, int numberOfObjects);
+    void getCombinedDesires(Object **objects, int numberOfObjects);
 
     vector<Prey *> vectorOfNeighbours;
 private:
@@ -49,8 +48,9 @@ private:
 
     bool isPreyDead;
 
-    void getDesires();
+    void setAcclrtnWithDesires();
 
+    void rotateBody(GLfloat *newVelo);
 };
 
 #endif //BOIDS_PREY_H

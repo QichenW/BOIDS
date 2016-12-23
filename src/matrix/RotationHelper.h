@@ -2,8 +2,15 @@
 // Created by Qichen on 9/22/16.
 //
 
-#ifndef BOUNCINGBALLS_MATRIXGENERATOR_H
-#define BOUNCINGBALLS_MATRIXGENERATOR_H
+#ifndef BOIDS_ROTATIONHELPER_H
+#define BOIDS_ROTATIONHELPER_H
+/* sine cosine */
+#include <math.h>
+#include <algorithm>
+
+#include <iostream>
+using namespace std;
+
 // glut
 #if defined(__APPLE__)
 
@@ -37,4 +44,4 @@ private:
 
     static float *flattenTransformationMatrix(float matrix[4][4]);
 };
-#endif //BOUNCINGBALLS_MATRIXGENERATOR_H
+#endif //BOIDS_ROTATIONHELPER_H
