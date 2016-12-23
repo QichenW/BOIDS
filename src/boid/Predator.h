@@ -5,7 +5,7 @@
 #ifndef BOIDS_PREDATOR_H
 #define BOIDS_PREDATOR_H
 #include "Object.h"
-#include "Geometry.h"
+#include "VectorCalculation.h"
 #include "matrix/RotationHelper.h"
 #include <cstdlib>
 #if defined(__APPLE__)

@@ -9,7 +9,7 @@
 #include "Object.h"
 #include "Prey.h"
 #include "matrix/RotationHelper.h"
-#include "Geometry.h"
+#include "VectorCalculation.h"
 #include <cmath>
 #include <iostream>
 #if defined(__APPLE__)

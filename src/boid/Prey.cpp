@@ -47,9 +47,9 @@ void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
         *(velocity + i) += *(acclrtn + i);
     }
     //TODO test this maintain constant velocity
-    GLfloat veloTempMagnitude = Geometry::getMagnitude(velocity);
+    VectorCalculation::getUnitDirection(velocity, velocity);
     for(i = 0; i < 3; i++){
-        *(velocity + i) *= VELOCITY_CONSTANT/veloTempMagnitude;
+        *(velocity + i) *= VELOCITY_CONSTANT;
         flattenedTransformationMatrix[12 + i] = translation[i];
     }
 }
@@ -75,7 +75,7 @@ GLfloat Prey::getVelocityIn(const int direction) {
  * set unit travel direction, which is used to determine the heading of boids.
  */
 void Prey::setUnitTravelDirection() {
-    Geometry::getUnitDirection(unitTravelDirection, velocity);
+    VectorCalculation::getUnitDirection(unitTravelDirection, velocity);
 }
 
 /**
@@ -102,6 +102,7 @@ void Prey::setVelocity(GLfloat *v) {
     }
 }
 
+//TODO change this function - get combinded desires
 void Prey::rotateVelo(Object **objects, int numberOfObjects) {
     int i;
     unsigned long j;
@@ -132,22 +133,14 @@ void Prey::rotateVelo(Object **objects, int numberOfObjects) {
         for (j = 0; j <3 ; j++) {
             tempVelo[j] *= VELOCITY_CONSTANT/magnitude_tempVelo;
         }
-        //TODO rotate the body
+        //TODO test this
         GLfloat axis_q[3] = {};
-        axis_q[0] = currentPrey->unitTravelDirection[1] * tempVelo[2]
-                    - currentPrey->unitTravelDirection[2] * tempVelo[1];
-        axis_q[1] = currentPrey->unitTravelDirection[2] * tempVelo[0]
-                    - currentPrey->unitTravelDirection[0] * tempVelo[2];
-        axis_q[2] = currentPrey->unitTravelDirection[0] * tempVelo[1]
-                    - currentPrey->unitTravelDirection[1] * tempVelo[0];
-
-        GLfloat magnitude_axis = Geometry::getMagnitude(axis_q);
+        VectorCalculation::getCrossProduct(axis_q, currentPrey->unitTravelDirection, tempVelo);
+        GLfloat magnitude_axis = VectorCalculation::getMagnitude(axis_q);
         GLfloat halfAngle;
         if(magnitude_axis == 0) {
-            //if the two vectors are parallel, no needs to detour
-            if (tempVelo[0] * currentPrey->unitTravelDirection[0] >= 0 &&
-                    tempVelo[1] * currentPrey->unitTravelDirection[1] >=0
-                    && tempVelo[2] * currentPrey->unitTravelDirection[2] >=0) {
+            //if the two vectors are in same direction, no needs to detour
+            if(VectorCalculation::areTwoVectorSameDirection(tempVelo, currentPrey->unitTravelDirection)){
                 continue;
             }
             // if the two vectors are opposite

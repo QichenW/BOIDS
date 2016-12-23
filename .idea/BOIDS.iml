@@ -18,12 +18,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Predator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Predator.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/DrawObjects.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/boid/Geometry.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/matrix/VectorCalculation.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/DrawObjects.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Prey.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Object.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Object.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/boid/Geometry.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/matrix/VectorCalculation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/BoundaryDetector.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/BoundaryDetector.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/boid/Prey.cpp" isTestSource="false" />

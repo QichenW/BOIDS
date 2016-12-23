@@ -74,7 +74,7 @@ GLfloat Predator::getVelocityIn(const int direction) {
  * set unit travel direction, which is used to determine the acceleration caused by friction.
  */
 void Predator::setUnitTravelDirection() {
-    Geometry::getUnitDirection(unitTravelDirection, velocity);
+    VectorCalculation::getUnitDirection(unitTravelDirection, velocity);
 }
 
 /**

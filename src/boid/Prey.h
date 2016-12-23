@@ -6,7 +6,7 @@
 #define BOIDS_PREY_H
 using namespace std;
 #include "Object.h"
-#include "Geometry.h"
+#include "VectorCalculation.h"
 #include <vector>
 #include "matrix/RotationHelper.h"
 #include <cstdlib>

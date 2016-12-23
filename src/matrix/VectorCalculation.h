@@ -2,11 +2,11 @@
 // Created by Qichen on 11/13/16.
 //
 
-#ifndef BOUNCINGBALLS_GEOMETRY_H
-#define BOUNCINGBALLS_GEOMETRY_H
+#ifndef BOIDS_VECTORCALCULATION_H
+#define BOIDS_VECTORCALCULATION_H
 
-#include "Object.h"
-#include "Prey.h"
+#include "boid/Object.h"
+#include "boid/Prey.h"
 #include "matrix/RotationHelper.h"
 #include <cmath>
 #if defined(__APPLE__)
@@ -17,7 +17,7 @@
 #include <GL/glut.h>
 #endif
 
-class Geometry {
+class VectorCalculation {
 
 public:
     static GLfloat getDistance(GLfloat *pos1, GLfloat *pos2);
@@ -25,7 +25,11 @@ public:
     static void getUnitDirection(GLfloat *des, GLfloat *src);
     static GLfloat getMagnitude(GLfloat *v);
     static bool isZeroVector(GLfloat *v);
+
+    static void getCrossProduct(GLfloat *des, GLfloat *from, GLfloat *to);
+
+    static bool areTwoVectorSameDirection(GLfloat v1[3], GLfloat v2[3]);
 };
 
 
-#endif //BOUNCINGBALLS_GEOMETRY_H
+#endif //BOIDS_VECTORCALCULATION_H
