@@ -4,14 +4,6 @@
 
 #include "Object.h"
 
-
-const GLfloat Object::BOTTOM_WALL_Y = -50;
-const GLfloat Object::TOP_WALL_Y = 50;
-const GLfloat Object::LEFT_WALL_X = -50;
-const GLfloat Object::RIGHT_WALL_X = 50;
-const GLfloat Object::NEAR_WALL_Z = 50;
-const GLfloat Object::REAR_WALL_Z = -50;
-
 /***
  * Object is the base class of Ball; a wall is an instance of Object
  */

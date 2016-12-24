@@ -214,7 +214,7 @@ RotationHelper::updateFlattenedMatrixWithQuaternion(GLfloat *oldFlattened, GLflo
      for (i = 0; i < 4; i++){
         for(j = 0; j < 4; j++){
             for(k = 0; k < 4; k++){
-                tempNewMatrix[i][j] += detourQuatMatrix[i][k] * tempMatrix[k][j];
+                tempNewMatrix[i][j] += tempMatrix[i][k] * detourQuatMatrix[k][j];
             }
         }
     }

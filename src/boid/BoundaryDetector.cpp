@@ -22,7 +22,10 @@ void BoundaryDetector::detectAll(Object **all, int numberOfObjects) {
         b1 = (Prey *) all[i];
         // clear the vector of neighbours and add in later
         b1->vectorOfNeighbours.clear();
-        for (j = 0; j < i; j++){
+        for (j = 0; j < numberOfObjects; j++){
+            if(i ==j) {
+                continue;
+            }
             //detecting if collision with a wall
             if (all[j]->isFixed){
                 //TODO change these boundary behaviours
@@ -73,8 +76,6 @@ void BoundaryDetector::detectAll(Object **all, int numberOfObjects) {
 
 /**
  * halt the object if reach the boundary
- * @param i identifies which direction
- * @param ratio the amount of velocity presists
  */
 void BoundaryDetector::halt(GLfloat *veloOneDir, GLfloat * acclrtnOneDir){
    *veloOneDir = 0;

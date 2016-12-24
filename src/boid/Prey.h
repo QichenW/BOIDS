@@ -14,8 +14,6 @@ using namespace std;
 #if defined(__APPLE__)
 #include <GLUT/glut.h>
 
-
-
 #else
 #include <GL/glut.h>
 #endif
@@ -36,7 +34,7 @@ public:
     static const GLfloat VELOCITY_CONSTANT;
     GLfloat unitTravelDirection[3];
 
-    void getCombinedDesires(int numberOfObjects);
+    void getCombinedDesires();
 
     vector<Prey *> vectorOfNeighbours;
 private:
@@ -48,9 +46,11 @@ private:
 
     bool isPreyDead;
 
-    void setAcclrtnWithDesires();
+    void setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire);
 
     void rotateBody(GLfloat *newVelo);
+
+    static const GLfloat ACCLRTN_CONSTANT;
 };
 
 #endif //BOIDS_PREY_H
