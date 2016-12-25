@@ -31,7 +31,6 @@ public:
     GLfloat velocity[3];
     GLfloat acclrtn[3];
     void fall();
-    static const GLfloat VELOCITY_CONSTANT;
     GLfloat unitTravelDirection[3];
 
     void getCombinedDesires();
@@ -41,6 +40,10 @@ private:
     static const int X_DIRECTION;
     static const int Y_DIRECTION;
     static const int Z_DIRECTION;
+    static const GLfloat desireX;
+    static const GLfloat desireY;
+    static const GLfloat desireZ;
+    static const GLfloat MAX_VELOCITY;
 
     void setUnitTravelDirection();
 
@@ -50,7 +53,6 @@ private:
 
     void rotateBody(GLfloat *newVelo);
 
-    static const GLfloat ACCLRTN_CONSTANT;
 };
 
 #endif //BOIDS_PREY_H

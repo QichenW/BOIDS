@@ -72,3 +72,9 @@ bool VectorCalculation::areTwoVectorSameDirection(GLfloat *v1, GLfloat *v2) {
 
     return v1[0] * v2[0] >= 0 && v1[1] * v2[1] >=0 && v1[2] * v2[2] >=0;
 }
+/**
+ * @return the dot product of two 3d vectors
+ */
+GLfloat VectorCalculation::dotProduct(GLfloat *v1, GLfloat *v2) {
+    return *v1 * *v2 + *(v1 + 1) * *(v2 + 1) + *(v1 + 2) * *(v2 + 2);
+}

@@ -6,8 +6,10 @@
 const int Prey::X_DIRECTION = 0;
 const int Prey::Y_DIRECTION = 1;
 const int Prey::Z_DIRECTION = 2;
-const GLfloat Prey::VELOCITY_CONSTANT = 10;
-const GLfloat Prey::ACCLRTN_CONSTANT = 50;
+const GLfloat Prey::desireX = 0;
+const GLfloat Prey::desireY = 0;
+const GLfloat Prey::desireZ = 0;
+const GLfloat Prey::MAX_VELOCITY= 20;
 
 /**
  *  Prey is a subclass of Object
@@ -27,11 +29,15 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
     int i;
     radius = r;
     unitTravelDirection[0] = 1, unitTravelDirection[1] = 0, unitTravelDirection[2] = 0;
-    rotateBody(velocity);
     for (i = 0; i < 3; i++) {
         *(acclrtn + i) = 0;
         *(Prey::velocity + i) = *(velocity + i);
     }
+    //because of the way the code is written, must rotate first then set translation
+    rotateBody(Prey::velocity);
+    flattenedTransformationMatrix[12] = translation[0];
+    flattenedTransformationMatrix[13] = translation[1];
+    flattenedTransformationMatrix[14] = translation[2];
     isPreyDead = false;
     isPredator = false;
     //TODO subject to change
@@ -49,14 +55,18 @@ void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
         *(translation + i) += *(velocity + i) * t;
         *(velocity + i) += *(acclrtn + i) * t;
     }
-    //TODO test this maintain constant velocity
-    VectorCalculation::getUnitDirection(velocity, velocity);
-    for (i = 0; i < 3; i++) {
-        *(velocity + i) *= VELOCITY_CONSTANT;
-        flattenedTransformationMatrix[12 + i] = translation[i];
+    GLfloat veloMagnitude = VectorCalculation::getMagnitude(velocity);
+    if ( veloMagnitude > MAX_VELOCITY){
+        for (i = 0; i < 3; i++){
+            *(velocity + i) *= MAX_VELOCITY / veloMagnitude;
+        }
     }
     // rotate body by referring to old travel direction and new velocity
     rotateBody(velocity);
+    //because of the way the code is written, must rotate first then set translation
+    for (i = 0; i < 3; i++) {
+        flattenedTransformationMatrix[12 + i] = translation[i];
+    }
     // update travel direction
     setUnitTravelDirection();
 }
@@ -100,13 +110,17 @@ void Prey::fall() {
 void Prey::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire) {
     //TODO change the weights and magnitude of acceleration, now are 1 2 1
     GLfloat combinedDesire[3] ={};
+    GLfloat directionToGoal[3] = {desireX - translation[0], desireY - translation[1], desireZ - translation[2]};
+    VectorCalculation::getUnitDirection(directionToGoal, directionToGoal);
     int i;
     for(i = 0; i< 3; i++){
         combinedDesire[i] += *(sDesire + i) + *(aDesire + i) * 2 + *(cDesire + i);
     }
-    VectorCalculation::getUnitDirection(combinedDesire, combinedDesire);
+    for(i = 0; i< 3; i++){
+        combinedDesire[i] += 50 * directionToGoal[i];
+    }
     for( i = 0; i < 3; i++){
-        *(acclrtn + i) = *(combinedDesire + i) * ACCLRTN_CONSTANT;
+        *(acclrtn + i) = *(combinedDesire + i);
     }
 }
 
@@ -150,6 +164,7 @@ void Prey::rotateBody(GLfloat *newVelo) {
     int j;
     GLfloat axis_q[3] = {};
     VectorCalculation::getCrossProduct(axis_q, unitTravelDirection, newVelo);
+    GLfloat magnitudeNewVelo = VectorCalculation::getMagnitude(newVelo);
     GLfloat magnitude_axis = VectorCalculation::getMagnitude(axis_q);
     GLfloat halfAngle;
     if (magnitude_axis == 0) {
@@ -164,11 +179,18 @@ void Prey::rotateBody(GLfloat *newVelo) {
         halfAngle = (GLfloat) (M_PI / 2);
     } else {
         // normalize the axis vector
-        for (j = 0; j < 3; j++) {
-            axis_q[j] /= magnitude_axis;
+        VectorCalculation::getUnitDirection(axis_q,axis_q);
+        GLfloat sinValue2 = magnitude_axis / magnitudeNewVelo;
+        //TODO write about this - use dot product to determine the angle
+        if(VectorCalculation::dotProduct(unitTravelDirection, newVelo) >= 0){
+            halfAngle = asinf(sinValue2) / 2;
+        } else {
+            if(sinValue2 > 0) {
+             halfAngle = (GLfloat) ((M_PI - asinf(sinValue2)) / 2);
+            } else{
+                halfAngle = (GLfloat) ((asinf(sinValue2) - M_PI) / 2);
+            }
         }
-        GLfloat sinValue2 = magnitude_axis / VELOCITY_CONSTANT;
-        halfAngle = asinf(sinValue2) / 2;
 
     }
     GLfloat quatForAlignment[4] = {cosf(halfAngle), sinf(halfAngle) * axis_q[0], sinf(halfAngle) * axis_q[1],

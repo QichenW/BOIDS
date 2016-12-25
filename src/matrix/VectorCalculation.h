@@ -29,6 +29,8 @@ public:
     static void getCrossProduct(GLfloat *des, GLfloat *from, GLfloat *to);
 
     static bool areTwoVectorSameDirection(GLfloat v1[3], GLfloat v2[3]);
+
+    static GLfloat dotProduct(GLfloat *v1, GLfloat *v2);
 };
 
 
