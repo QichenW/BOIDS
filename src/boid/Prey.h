@@ -40,9 +40,9 @@ private:
     static const int X_DIRECTION;
     static const int Y_DIRECTION;
     static const int Z_DIRECTION;
-    static const GLfloat desireX;
-    static const GLfloat desireY;
-    static const GLfloat desireZ;
+    static const GLfloat goalX;
+    static const GLfloat goalY;
+    static const GLfloat goalZ;
     static const GLfloat MAX_VELOCITY;
 
     void setUnitTravelDirection();

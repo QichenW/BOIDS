@@ -6,9 +6,9 @@
 const int Prey::X_DIRECTION = 0;
 const int Prey::Y_DIRECTION = 1;
 const int Prey::Z_DIRECTION = 2;
-const GLfloat Prey::desireX = 0;
-const GLfloat Prey::desireY = 0;
-const GLfloat Prey::desireZ = 0;
+const GLfloat Prey::goalX = 100;
+const GLfloat Prey::goalY = 100;
+const GLfloat Prey::goalZ = 100;
 const GLfloat Prey::MAX_VELOCITY= 20;
 
 /**
@@ -110,11 +110,11 @@ void Prey::fall() {
 void Prey::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire) {
     //TODO change the weights and magnitude of acceleration, now are 1 2 1
     GLfloat combinedDesire[3] ={};
-    GLfloat directionToGoal[3] = {desireX - translation[0], desireY - translation[1], desireZ - translation[2]};
+    GLfloat directionToGoal[3] = {goalX - translation[0], goalY - translation[1], goalZ - translation[2]};
     VectorCalculation::getUnitDirection(directionToGoal, directionToGoal);
     int i;
     for(i = 0; i< 3; i++){
-        combinedDesire[i] += *(sDesire + i) + *(aDesire + i) * 2 + *(cDesire + i);
+        combinedDesire[i] += *(sDesire + i) * 50 + *(aDesire + i) * 2 + *(cDesire + i) * 50;
     }
     for(i = 0; i< 3; i++){
         combinedDesire[i] += 50 * directionToGoal[i];
