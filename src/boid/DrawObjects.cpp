@@ -36,7 +36,7 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
     DrawObjects::numberOfObjects = pPrefs->numberOfObjects;
     unsigned long i;
     int j,k;
-    GLfloat defaultScale = 2.6, tempRadius;
+    GLfloat defaultScale = 2.6, tempRadius, realRadius;
     vector<GLfloat *> orientations, positions, velocities, angularVelos;
 
     GLuint wallObjID = SimpleObjLoader::loadObj((char *) WALL_OBJ_NAME, 1, 1.0, true, false, false);
@@ -71,19 +71,25 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
         } else if(k < NUMBER_OF_WALLS){
             *(pObjects + k) = new Object(k,wall2ObjID, true, orientations.at(k), positions.at(k));
         } else {
+            Prey::amount++;
             tempRadius = pPrefs->listOfSphereRadius.at(k - NUMBER_OF_WALLS);
+            realRadius = tempRadius * defaultScale;
+            //record biggest radius of the boids' enclosing sphere
+            if(realRadius > Prey::biggestRadius){
+                Prey::biggestRadius = realRadius;
+            }
             if(tempRadius<1.48){
                 *(pObjects + k) = new Prey(k, sBoidID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                          defaultScale * tempRadius); //the radius of the ball in .obj file is 2.4
+                                          realRadius); //the radius of the ball in .obj file is 2.4
             } else if(tempRadius < 1.98){
                 *(pObjects + k) = new Prey(k, mBoidID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                           defaultScale * tempRadius);
+                                           realRadius);
             } else {
                 *(pObjects + k) = new Prey(k, lBoidID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                           defaultScale *tempRadius);
+                                           realRadius);
             }
 
         }

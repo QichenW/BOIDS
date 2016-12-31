@@ -6,10 +6,11 @@
 const int Prey::X_DIRECTION = 0;
 const int Prey::Y_DIRECTION = 1;
 const int Prey::Z_DIRECTION = 2;
-const GLfloat Prey::goalX = 100;
-const GLfloat Prey::goalY = 100;
-const GLfloat Prey::goalZ = 100;
-const GLfloat Prey::MAX_VELOCITY= 20;
+const GLfloat Prey::MAX_VELOCITY= 30;
+int Prey::amount = 0;
+GLfloat Prey::biggestRadius = 1.0;
+GLfloat Prey::goal[3] = {};
+GLfloat Prey::centroid[3] = {};
 
 /**
  *  Prey is a subclass of Object
@@ -38,7 +39,6 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
     flattenedTransformationMatrix[12] = translation[0];
     flattenedTransformationMatrix[13] = translation[1];
     flattenedTransformationMatrix[14] = translation[2];
-    isPreyDead = false;
     isPredator = false;
     //TODO subject to change
     vicinityRadius = 10 * radius;
@@ -96,28 +96,19 @@ void Prey::setUnitTravelDirection() {
 }
 
 /**
- * When this function is called, it means the prey is dead.
- */
-void Prey::fall() {
-//TODO fall
-    isPreyDead = true;
-}
-
-
-/**
  * get the combined desire as acceleration
  */
 void Prey::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire) {
     //TODO change the weights and magnitude of acceleration, now are 1 2 1
     GLfloat combinedDesire[3] ={};
-    GLfloat directionToGoal[3] = {goalX - translation[0], goalY - translation[1], goalZ - translation[2]};
+    GLfloat directionToGoal[3] = {goal[0] - translation[0], goal[1] - translation[1], goal[2] - translation[2]};
     VectorCalculation::getUnitDirection(directionToGoal, directionToGoal);
     int i;
     for(i = 0; i< 3; i++){
-        combinedDesire[i] += *(sDesire + i) * 50 + *(aDesire + i) * 2 + *(cDesire + i) * 50;
+        combinedDesire[i] += *(sDesire + i) * 50 + *(aDesire + i) * 10 + *(cDesire + i) * 10;
     }
     for(i = 0; i< 3; i++){
-        combinedDesire[i] += 50 * directionToGoal[i];
+        combinedDesire[i] += 20 * directionToGoal[i];
     }
     for( i = 0; i < 3; i++){
         *(acclrtn + i) = *(combinedDesire + i);
@@ -198,4 +189,30 @@ void Prey::rotateBody(GLfloat *newVelo) {
     //TODO this function is tested
     setFlattenedTransformationMatrix(RotationHelper::updateFlattenedMatrixWithQuaternion(
             getFlattenedTransformationMatrix(), quatForAlignment));
+}
+/**
+ * update the centroid equivalent of the group of boids
+ * @param sumOfPos the sum of the positions of boids
+ */
+void Prey::updateCentroid(GLfloat *sumOfPos) {
+    int i;
+    for(i = 0; i < 3; i++){
+        centroid[i] = *(sumOfPos + i) / amount;
+    }
+}
+
+/**
+ * check if current goal is met (if the centroid is close enough to the goal); if not return,
+ * otherwise randomly update the goal
+ */
+void Prey::updateGoal() {
+    if (VectorCalculation::getDistance(goal, centroid) > amount * biggestRadius){
+       return;
+    }
+    goal[0] = rand() % 187 - 93;
+    cout<< goal[0] <<'\t';
+    goal[1] = rand()%87 - 43;
+    cout<< goal[1] <<'\t';
+    goal[2] = rand()%87 - 43;
+    cout<< goal[2] <<endl;
 }

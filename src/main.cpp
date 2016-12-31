@@ -50,15 +50,25 @@ void drawFrame() {
     glLoadIdentity();
     glPushMatrix();
     //move the model view away from the camera, so that we are not inside the object
-//    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-180,1});
-   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
+    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-180,1});
+//   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
     glColor3f(0.1, 0.45, 0.1);
     int i;
+    GLfloat tempSum[3] = {};
+    //check if 1. two boids are close enough, then they mark each other as neighbours
+    // or 2. a boids is too close to the walls, the eliminate the velocity in the corresponding directions
     BoundaryDetector::detectAll(objects, prefs.numberOfObjects);
+    // if one goal is met, generate another goal
+    Prey::updateGoal();
     for(i = 6; i <prefs.numberOfObjects; i++){
         ((Prey *) objects[i])->getCombinedDesires();
+        //move the boid
         ((Prey *) objects[i])->updateFlattenedTransformationMatrix(increment);
+        tempSum[0] += objects[i]->getTranslation()[0];
+        tempSum[1] += objects[i]->getTranslation()[1];
+        tempSum[2] += objects[i]->getTranslation()[2];
     }
+    Prey::updateCentroid(tempSum);
     DrawObjects::draw(objects);
 
     glPopMatrix();
