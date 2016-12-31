@@ -33,6 +33,8 @@ private:
     static const char* CONE_OBJ_MAME;
 
     static const char *WALL_OBJ_NAME;
+
+    static const char *WALL_2_OBJ_NAME;
 };
 
 

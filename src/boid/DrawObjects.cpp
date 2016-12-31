@@ -9,6 +9,7 @@
 
 const char * DrawObjects::CONE_OBJ_MAME = "cone.obj";
 const char * DrawObjects::WALL_OBJ_NAME= "wall.obj";
+const char * DrawObjects::WALL_2_OBJ_NAME= "wall2.obj";
 int DrawObjects::numberOfObjects;
 const int DrawObjects::NUMBER_OF_WALLS = 6;
 
@@ -39,6 +40,7 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
     vector<GLfloat *> orientations, positions, velocities, angularVelos;
 
     GLuint wallObjID = SimpleObjLoader::loadObj((char *) WALL_OBJ_NAME, 1, 1.0, true, false, false);
+    GLuint wall2ObjID = SimpleObjLoader::loadObj((char *) WALL_2_OBJ_NAME, 1, 1.0, true, false, false);
 
     GLuint sBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 1, true, false, true);
 
@@ -64,8 +66,10 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
     }
 
     for (k = 0; k < numberOfObjects; k++){
-        if(k < NUMBER_OF_WALLS){
+        if (k < 2) {
             *(pObjects + k) = new Object(k,wallObjID, true, orientations.at(k), positions.at(k));
+        } else if(k < NUMBER_OF_WALLS){
+            *(pObjects + k) = new Object(k,wall2ObjID, true, orientations.at(k), positions.at(k));
         } else {
             tempRadius = pPrefs->listOfSphereRadius.at(k - NUMBER_OF_WALLS);
             if(tempRadius<1.48){
