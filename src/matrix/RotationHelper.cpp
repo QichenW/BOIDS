@@ -197,26 +197,19 @@ void RotationHelper::rotateAvectorWithQuaternion(GLfloat dest[3], GLfloat *quat,
         }
     }
 }
-
-//TODO test this
+/**
+ * generate flattened transformation matrix from translation and quaternion
+ * @param translation - the translation of the object
+ * @param quat the - quaternion with respect to the object model's default orientation (1,0,0)
+ * @return - the flattened transformation matrix
+ */
 GLfloat *
-RotationHelper::updateFlattenedMatrixWithQuaternion(GLfloat *oldFlattened, GLfloat *detourQuaternion) {
-    int i,j, k;
-    GLfloat tempMatrix[4][4] = {}; // make old flattened matrix a 4*4 matrix
-    GLfloat tempNewMatrix[4][4] = {}; // a 4*4 matrix for new rotation
-    GLfloat detourQuatMatrix[4][4] = {}; // the detour quaternion's matrix
-    getTranslationMatrixFromQuat(detourQuatMatrix, detourQuaternion);
-    for (i = 0; i < 4; i++){
-        for(j = 0; j < 4; j++){
-            tempMatrix[j][i] = oldFlattened[i * 4 + j];
-        }
+RotationHelper::getFlattenedMatrixWithQuatAndTrans(GLfloat *translation, GLfloat *quat) {
+    int i,k;
+    GLfloat newMatrix[4][4] = {}; // the detour quaternion's matrix
+    getTranslationMatrixFromQuat(newMatrix, quat);
+    for (i = 0; i < 3; i++){
+        newMatrix[i][3] = *(translation +i);
     }
-     for (i = 0; i < 4; i++){
-        for(j = 0; j < 4; j++){
-            for(k = 0; k < 4; k++){
-                tempNewMatrix[i][j] += detourQuatMatrix[i][k] * tempMatrix[k][j];
-            }
-        }
-    }
-    return flattenTransformationMatrix(tempNewMatrix);
+   return flattenTransformationMatrix(newMatrix);
 }

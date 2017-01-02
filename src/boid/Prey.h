@@ -30,7 +30,6 @@ public:
     GLfloat getVelocityIn(const int direction);
     GLfloat velocity[3];
     GLfloat acclrtn[3];
-    GLfloat unitTravelDirection[3];
 
     void getCombinedDesires();
 
@@ -46,12 +45,11 @@ private:
     static const int Y_DIRECTION;
     static const int Z_DIRECTION;
     static const GLfloat MAX_VELOCITY;
-
-    void setUnitTravelDirection();
+    static const GLfloat DEFAULT_DIRECTION[3];
 
     void setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire);
 
-    void rotateBody(GLfloat *newVelo);
+    void rotateBodyAndSetTranslation(GLfloat *newVelo);
 
     static GLfloat centroid[3];
     static GLfloat goal[3];

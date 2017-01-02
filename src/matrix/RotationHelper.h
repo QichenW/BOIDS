@@ -28,7 +28,7 @@ public:
     static void rotateAvectorWithQuaternion(GLfloat dest[3], GLfloat quat[4], GLfloat src[3]);
 
     static GLfloat *
-    updateFlattenedMatrixWithQuaternion(GLfloat *oldFlattened, GLfloat detourQuaternion[4]);
+    getFlattenedMatrixWithQuatAndTrans(GLfloat *translation, GLfloat *quat);
 
 private:
     static void getHomogeneousFromEulerAngle(float *eulerAngle);

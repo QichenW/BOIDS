@@ -7,7 +7,8 @@
 #include <iostream>
 #include "DrawObjects.h"
 
-const char * DrawObjects::CONE_OBJ_MAME = "cone.obj";
+const char * DrawObjects::CONE_OBJ_MAME = "fishBody.obj";
+//const char * DrawObjects::CONE_OBJ_MAME = "cone.obj";
 const char * DrawObjects::WALL_OBJ_NAME= "wall.obj";
 const char * DrawObjects::WALL_2_OBJ_NAME= "wall2.obj";
 int DrawObjects::numberOfObjects;

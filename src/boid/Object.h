@@ -32,8 +32,6 @@ public:
     GLfloat getZ();
 
     bool isFixed;
-    bool isPredator;
-
 protected:
     int id;
     GLuint listId;

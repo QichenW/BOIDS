@@ -7,6 +7,7 @@ const int Prey::X_DIRECTION = 0;
 const int Prey::Y_DIRECTION = 1;
 const int Prey::Z_DIRECTION = 2;
 const GLfloat Prey::MAX_VELOCITY= 30;
+const GLfloat Prey::DEFAULT_DIRECTION[3]= {1,0,0};
 int Prey::amount = 0;
 GLfloat Prey::biggestRadius = 1.0;
 GLfloat Prey::goal[3] = {};
@@ -29,20 +30,14 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
         : Object(oId, lId, isF, orienttn, translatn) { // call the base class constructor first
     int i;
     radius = r;
-    unitTravelDirection[0] = 1, unitTravelDirection[1] = 0, unitTravelDirection[2] = 0;
     for (i = 0; i < 3; i++) {
         *(acclrtn + i) = 0;
         *(Prey::velocity + i) = *(velocity + i);
     }
     //because of the way the code is written, must rotate first then set translation
-    rotateBody(Prey::velocity);
-    flattenedTransformationMatrix[12] = translation[0];
-    flattenedTransformationMatrix[13] = translation[1];
-    flattenedTransformationMatrix[14] = translation[2];
-    isPredator = false;
-    //TODO subject to change
+    rotateBodyAndSetTranslation(Prey::velocity);
+   //TODO subject to change
     vicinityRadius = 10 * radius;
-    setUnitTravelDirection();
 }
 
 /***
@@ -62,13 +57,7 @@ void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
         }
     }
     // rotate body by referring to old travel direction and new velocity
-    rotateBody(velocity);
-    //because of the way the code is written, must rotate first then set translation
-    for (i = 0; i < 3; i++) {
-        flattenedTransformationMatrix[12 + i] = translation[i];
-    }
-    // update travel direction
-    setUnitTravelDirection();
+    rotateBodyAndSetTranslation(velocity);
 }
 
 /**
@@ -86,13 +75,6 @@ GLfloat Prey::getVelocityIn(const int direction) {
         default:
             return 0;
     }
-}
-
-/***
- * set unit travel direction, which is used to determine the heading of boids.
- */
-void Prey::setUnitTravelDirection() {
-    VectorCalculation::getUnitDirection(unitTravelDirection, velocity);
 }
 
 /**
@@ -151,16 +133,16 @@ void Prey::getCombinedDesires() {
  * rotate the body to new orientation that is determined by new velocity
  * @param newVelo
  */
-void Prey::rotateBody(GLfloat *newVelo) {
+void Prey::rotateBodyAndSetTranslation(GLfloat *newVelo) {
     int j;
     GLfloat axis_q[3] = {};
-    VectorCalculation::getCrossProduct(axis_q, unitTravelDirection, newVelo);
+    VectorCalculation::getCrossProduct(axis_q, (GLfloat *) DEFAULT_DIRECTION, newVelo);
     GLfloat magnitudeNewVelo = VectorCalculation::getMagnitude(newVelo);
     GLfloat magnitude_axis = VectorCalculation::getMagnitude(axis_q);
     GLfloat halfAngle;
     if (magnitude_axis == 0) {
         //if the two vectors are in same direction, no needs to detour
-        if (VectorCalculation::areTwoVectorSameDirection(newVelo, unitTravelDirection)) {
+        if (VectorCalculation::areTwoVectorSameDirection(newVelo,  (GLfloat *) DEFAULT_DIRECTION)) {
             return;
         }
         // if the two vectors are opposite
@@ -173,7 +155,7 @@ void Prey::rotateBody(GLfloat *newVelo) {
         VectorCalculation::getUnitDirection(axis_q,axis_q);
         GLfloat sinValue2 = magnitude_axis / magnitudeNewVelo;
         //TODO write about this - use dot product to determine the angle
-        if(VectorCalculation::dotProduct(unitTravelDirection, newVelo) >= 0){
+        if(VectorCalculation::dotProduct((GLfloat *) DEFAULT_DIRECTION, newVelo) >= 0){
             halfAngle = asinf(sinValue2) / 2;
         } else {
             if(sinValue2 > 0) {
@@ -187,8 +169,8 @@ void Prey::rotateBody(GLfloat *newVelo) {
     GLfloat quatForAlignment[4] = {cosf(halfAngle), sinf(halfAngle) * axis_q[0], sinf(halfAngle) * axis_q[1],
                                    sinf(halfAngle) * axis_q[2]};
     //TODO this function is tested
-    setFlattenedTransformationMatrix(RotationHelper::updateFlattenedMatrixWithQuaternion(
-            getFlattenedTransformationMatrix(), quatForAlignment));
+    setFlattenedTransformationMatrix(RotationHelper::getFlattenedMatrixWithQuatAndTrans(
+            translation, quatForAlignment));
 }
 /**
  * update the centroid equivalent of the group of boids
@@ -206,11 +188,11 @@ void Prey::updateCentroid(GLfloat *sumOfPos) {
  * otherwise randomly update the goal
  */
 void Prey::updateGoal() {
-    if (VectorCalculation::getDistance(goal, centroid) > amount * biggestRadius){
+    if (VectorCalculation::getDistance(goal, centroid) > amount / 2 * biggestRadius){
        return;
     }
     goal[0] = rand() % 187 - 93;
-    cout<< goal[0] <<'\t';
+    cout<< "Current goal is " << goal[0] <<'\t';
     goal[1] = rand()%87 - 43;
     cout<< goal[1] <<'\t';
     goal[2] = rand()%87 - 43;
