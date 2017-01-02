@@ -6,7 +6,7 @@
 #define BOIDS_VECTORCALCULATION_H
 
 #include "boid/Object.h"
-#include "boid/Prey.h"
+#include "boid/Fish.h"
 #include "matrix/RotationHelper.h"
 #include <cmath>
 #if defined(__APPLE__)

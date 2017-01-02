@@ -29,9 +29,10 @@ void DrawObjects::draw(Object **objects) {
             glPopMatrix();
         } else {
             //TODO draw articulated figures
+            Fish * fish = (Fish *) objects[i];
             glPushMatrix();
-            glMultMatrixf(objects[i]->getFlattenedTransformationMatrix());
-            glCallList(objects[i]->getListId());
+            glMultMatrixf(fish->getFlattenedTransformationMatrix());
+            glCallList(fish->getListId());
             glPopMatrix();
         }
     }
@@ -88,23 +89,23 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
         } else if(k < NUMBER_OF_WALLS){
             *(pObjects + k) = new Object(k,wall2ObjID, true, orientations.at(k), positions.at(k));
         } else {
-            Prey::amount++;
+            Fish::amount++;
             tempRadius = pPrefs->listOfSphereRadius.at(k - NUMBER_OF_WALLS);
             realRadius = tempRadius * defaultScale;
             //record biggest radius of the boids' enclosing sphere
-            if(realRadius > Prey::biggestRadius){
-                Prey::biggestRadius = realRadius;
+            if(realRadius > Fish::biggestRadius){
+                Fish::biggestRadius = realRadius;
             }
             if(tempRadius<1.48){
-                *(pObjects + k) = new Prey(k, sHeadID, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Fish(k, sHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
                                           realRadius, sBodyID, sTailID); //the radius of the ball in .obj file is 2.4
             } else if(tempRadius < 1.98){
-                *(pObjects + k) = new Prey(k, mHeadID, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Fish(k, mHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
                                            realRadius, mBodyID, mTailID);
             } else {
-                *(pObjects + k) = new Prey(k, lHeadID, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Fish(k, lHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
                                            realRadius, lBodyID, lTailID);
             }

@@ -17,9 +17,9 @@ const int BoundaryDetector::Z_DIRECTION = 2;
  */
 void BoundaryDetector::detectAll(Object **all, int numberOfObjects) {
     int i,j;
-    Prey * b1, * b2;
+    Fish * b1, * b2;
     for(i = NUMBER_OF_WALLS; i < numberOfObjects; i++){
-        b1 = (Prey *) all[i];
+        b1 = (Fish *) all[i];
         // clear the vector of neighbours and add in later
         b1->vectorOfNeighbours.clear();
         for (j = 0; j < numberOfObjects; j++){
@@ -64,7 +64,7 @@ void BoundaryDetector::detectAll(Object **all, int numberOfObjects) {
                         break;
                 }
             } else{ //detecting if collision with another
-                b2 = ((Prey *) all[j]);
+                b2 = ((Fish *) all[j]);
                 // add a neighbour if close enough
                 if(VectorCalculation::getDistance(b1->apprxCentroid,b2->apprxCentroid) <= b1->vicinityRadius){
                     b1->vectorOfNeighbours.push_back(b2);

@@ -4,7 +4,7 @@
 
 #ifndef BOIDS_DRAWOBJECTS_H
 #define BOIDS_DRAWOBJECTS_H
-#include "Prey.h"
+#include "Fish.h"
 #include "Object.h"
 #include "setup/SimpleObjLoader.h"
 #include "matrix/RotationHelper.h"

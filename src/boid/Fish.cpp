@@ -1,17 +1,17 @@
 //
 // Created by Qichen on 11/12/16.
 //
-#include "Prey.h"
+#include "Fish.h"
 
-const int Prey::X_DIRECTION = 0;
-const int Prey::Y_DIRECTION = 1;
-const int Prey::Z_DIRECTION = 2;
-const GLfloat Prey::MAX_VELOCITY= 30;
-const GLfloat Prey::DEFAULT_DIRECTION[3]= {1,0,0};
-int Prey::amount = 0;
-GLfloat Prey::biggestRadius = 1.0;
-GLfloat Prey::goal[3] = {};
-GLfloat Prey::flockCentroid[3] = {};
+const int Fish::X_DIRECTION = 0;
+const int Fish::Y_DIRECTION = 1;
+const int Fish::Z_DIRECTION = 2;
+const GLfloat Fish::MAX_VELOCITY= 30;
+const GLfloat Fish::DEFAULT_DIRECTION[3]= {1,0,0};
+int Fish::amount = 0;
+GLfloat Fish::biggestRadius = 1.0;
+GLfloat Fish::goal[3] = {};
+GLfloat Fish::flockCentroid[3] = {};
 
 /**
  *  Prey is a subclass of Object
@@ -25,7 +25,7 @@ GLfloat Prey::flockCentroid[3] = {};
  * @param angularVelocity - initial angular velocity
  * @param r - radius
  */
-Prey::Prey(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
+Fish::Fish(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
            GLfloat *translatn, GLfloat *velocity, GLfloat r, GLuint bLId, GLuint tLId)
         : Object(oId, hLID, isF, orienttn, translatn) { // call the base class constructor first
     int i;
@@ -34,10 +34,10 @@ Prey::Prey(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
     tailListId = tLId;
     for (i = 0; i < 3; i++) {
         *(acclrtn + i) = 0;
-        *(Prey::velocity + i) = *(velocity + i);
+        *(Fish::velocity + i) = *(velocity + i);
     }
     //because of the way the code is written, must rotate first then set translation
-    rotateBodyAndSetTranslation(Prey::velocity);
+    rotateBodyAndSetTranslation(Fish::velocity);
    //TODO subject to change
     vicinityRadius = 10 * radius;
     setIndividualCentroid();
@@ -47,7 +47,7 @@ Prey::Prey(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
  * update translation, rotation, velocity and angular velocity, then get the transformation matrix
  * @param t - delta t
  */
-void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
+void Fish::updateFlattenedTransformationMatrix(GLfloat t) {
     int i;
     for (i = 0; i < 3; i++) {
         *(translation + i) += *(velocity + i) * t;
@@ -67,7 +67,7 @@ void Prey::updateFlattenedTransformationMatrix(GLfloat t) {
  * @param direction indicate x or y or z direction
  * @return  the velocity in one direction
  */
-GLfloat Prey::getVelocityIn(const int direction) {
+GLfloat Fish::getVelocityIn(const int direction) {
     switch (direction) {
         case X_DIRECTION:
             return *velocity;
@@ -83,7 +83,7 @@ GLfloat Prey::getVelocityIn(const int direction) {
 /**
  * get the combined desire as acceleration
  */
-void Prey::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire) {
+void Fish::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cDesire) {
     //TODO change the weights and magnitude of acceleration, now are 1 2 1
     GLfloat combinedDesire[3] ={};
     GLfloat directionToGoal[3] = {goal[0] - translation[0], goal[1] - translation[1], goal[2] - translation[2]};
@@ -101,12 +101,12 @@ void Prey::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cD
 }
 
 //TODO change this function - get combinded desires
-void Prey::getCombinedDesires() {
+void Fish::getCombinedDesires() {
     unsigned long j;
     int noOfNeighbours = (int) vectorOfNeighbours.size();
     // alignment, cohesion, separation
     GLfloat alignmentDesire[3] = {}, cohesionDesire[3] = {}, separationDesire[3] = {};
-    Prey *currentNeighbour;
+    Fish *currentNeighbour;
     //accumulatively build up the desires
     for (j = 0; j < noOfNeighbours; j++) {
         currentNeighbour = vectorOfNeighbours.at(j);
@@ -136,7 +136,7 @@ void Prey::getCombinedDesires() {
  * rotate the body to new orientation that is determined by new velocity
  * @param newVelo
  */
-void Prey::rotateBodyAndSetTranslation(GLfloat *newVelo) {
+void Fish::rotateBodyAndSetTranslation(GLfloat *newVelo) {
     int j;
     GLfloat axis_q[3] = {};
     VectorCalculation::getCrossProduct(axis_q, (GLfloat *) DEFAULT_DIRECTION, newVelo);
@@ -179,7 +179,7 @@ void Prey::rotateBodyAndSetTranslation(GLfloat *newVelo) {
  * update the centroid equivalent of the group of boids
  * @param sumOfPos the sum of the positions of boids
  */
-void Prey::updateFlockCentroid(GLfloat *sumOfPos) {
+void Fish::updateFlockCentroid(GLfloat *sumOfPos) {
     int i;
     for(i = 0; i < 3; i++){
         flockCentroid[i] = *(sumOfPos + i) / amount;
@@ -190,7 +190,7 @@ void Prey::updateFlockCentroid(GLfloat *sumOfPos) {
  * check if current goal is met (if the centroid is close enough to the goal); if not return,
  * otherwise randomly update the goal
  */
-void Prey::updateGoal() {
+void Fish::updateGoal() {
     if (VectorCalculation::getDistance(goal, flockCentroid) > amount / 2 * biggestRadius){
        return;
     }
@@ -205,7 +205,7 @@ void Prey::updateGoal() {
 /**
  * The approximate position of the center of the fish, (translation is the position of fish head)
  */
-void Prey::setIndividualCentroid() {
+void Fish::setIndividualCentroid() {
     int i;
     GLfloat unitTravelDirection[3];
     VectorCalculation::getUnitDirection(unitTravelDirection, velocity);

@@ -18,10 +18,10 @@ using namespace std;
 #include <GL/glut.h>
 #endif
 
-class Prey: public Object {
+class Fish: public Object {
 public:
     static int amount;
-    Prey(int oId, GLuint hLID, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
+    Fish(int oId, GLuint hLID, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
               GLfloat r, GLuint bLId, GLuint tListId);
     void updateFlattenedTransformationMatrix(GLfloat t);
 
@@ -35,7 +35,7 @@ public:
     void getCombinedDesires();
     void setIndividualCentroid();
 
-    vector<Prey *> vectorOfNeighbours;
+    vector<Fish *> vectorOfNeighbours;
 
     static void updateFlockCentroid(GLfloat sumOfPos[3]);
 

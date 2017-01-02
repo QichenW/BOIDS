@@ -7,7 +7,7 @@
 
 
 #include "Object.h"
-#include "Prey.h"
+#include "Fish.h"
 #include "matrix/RotationHelper.h"
 #include "VectorCalculation.h"
 #include <cmath>

@@ -59,17 +59,17 @@ void drawFrame() {
     // or 2. a boids is too close to the walls, the eliminate the velocity in the corresponding directions
     BoundaryDetector::detectAll(objects, prefs.numberOfObjects);
     // if one goal is met, generate another goal
-    Prey::updateGoal();
+    Fish::updateGoal();
     for(i = 6; i <prefs.numberOfObjects; i++){
-        ((Prey *) objects[i])->getCombinedDesires();
+        ((Fish *) objects[i])->getCombinedDesires();
         //move the boid
-        ((Prey *) objects[i])->updateFlattenedTransformationMatrix(increment);
-        ((Prey *) objects[i])->setIndividualCentroid();
+        ((Fish *) objects[i])->updateFlattenedTransformationMatrix(increment);
+        ((Fish *) objects[i])->setIndividualCentroid();
         tempSum[0] += objects[i]->getTranslation()[0];
         tempSum[1] += objects[i]->getTranslation()[1];
         tempSum[2] += objects[i]->getTranslation()[2];
     }
-    Prey::updateFlockCentroid(tempSum);
+    Fish::updateFlockCentroid(tempSum);
     DrawObjects::draw(objects);
 
     glPopMatrix();
