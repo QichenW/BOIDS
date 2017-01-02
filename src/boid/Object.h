@@ -34,7 +34,7 @@ public:
     bool isFixed;
 protected:
     int id;
-    GLuint listId;
+    GLuint mainListId;
     GLfloat orientation[3]={};  //3
     GLfloat translation[3]={};  //3
     GLfloat flattenedTransformationMatrix[16]={}; //16

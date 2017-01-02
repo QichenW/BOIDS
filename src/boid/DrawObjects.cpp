@@ -7,8 +7,10 @@
 #include <iostream>
 #include "DrawObjects.h"
 
-const char * DrawObjects::CONE_OBJ_MAME = "fishBody.obj";
-//const char * DrawObjects::CONE_OBJ_MAME = "cone.obj";
+const char * DrawObjects::HEAD_OBJ_MAME = "fish_head.obj";
+//const char * DrawObjects::BODY_OBJ_MAME = "fish_body.obj";
+const char * DrawObjects::TAIL_OBJ_MAME = "fish_tail.obj";
+const char * DrawObjects::BODY_OBJ_MAME = "fishBody.obj";
 const char * DrawObjects::WALL_OBJ_NAME= "wall.obj";
 const char * DrawObjects::WALL_2_OBJ_NAME= "wall2.obj";
 int DrawObjects::numberOfObjects;
@@ -20,10 +22,18 @@ void DrawObjects::draw(Object **objects) {
     int i;
 
     for (i = 0; i < numberOfObjects; i++) {
-        glPushMatrix();
-        glMultMatrixf(objects[i] -> getFlattenedTransformationMatrix());
-        glCallList(objects[i]->getListId());
-        glPopMatrix();
+        if(objects[i]->isFixed) {
+            glPushMatrix();
+            glMultMatrixf(objects[i]->getFlattenedTransformationMatrix());
+            glCallList(objects[i]->getListId());
+            glPopMatrix();
+        } else {
+            //TODO draw articulated figures
+            glPushMatrix();
+            glMultMatrixf(objects[i]->getFlattenedTransformationMatrix());
+            glCallList(objects[i]->getListId());
+            glPopMatrix();
+        }
     }
 }
 
@@ -43,11 +53,17 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
     GLuint wallObjID = SimpleObjLoader::loadObj((char *) WALL_OBJ_NAME, 1, 1.0, true, false, false);
     GLuint wall2ObjID = SimpleObjLoader::loadObj((char *) WALL_2_OBJ_NAME, 1, 1.0, true, false, false);
 
-    GLuint sBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 1, true, false, true);
+    GLuint sHeadID = SimpleObjLoader::loadObj((char *) HEAD_OBJ_MAME, 1, 1, true, false, true);
+    GLuint sBodyID = SimpleObjLoader::loadObj((char *) BODY_OBJ_MAME, 1, 1, true, false, true);
+    GLuint sTailID = SimpleObjLoader::loadObj((char *) TAIL_OBJ_MAME, 1, 1, true, false, true);
 
-    GLuint mBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 1.5, true, false, true);
+    GLuint mHeadID = SimpleObjLoader::loadObj((char *) HEAD_OBJ_MAME, 1, 1.5, true, false, true);
+    GLuint mBodyID = SimpleObjLoader::loadObj((char *) BODY_OBJ_MAME, 1, 1.5, true, false, true);
+    GLuint mTailID = SimpleObjLoader::loadObj((char *) TAIL_OBJ_MAME, 1, 1.5, true, false, true);
 
-    GLuint lBoidID = SimpleObjLoader::loadObj((char *) CONE_OBJ_MAME, 2, 2.0, true, false, true);
+    GLuint lHeadID = SimpleObjLoader::loadObj((char *) HEAD_OBJ_MAME, 1, 2.0, true, false, true);
+    GLuint lBodyID = SimpleObjLoader::loadObj((char *) BODY_OBJ_MAME, 1, 2.0, true, false, true);
+    GLuint lTailID = SimpleObjLoader::loadObj((char *) TAIL_OBJ_MAME, 1, 2.0, true, false, true);
 
     orientations = pPrefs->listOfEulerAngle;
     positions = pPrefs->listOfPositions;
@@ -80,17 +96,17 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
                 Prey::biggestRadius = realRadius;
             }
             if(tempRadius<1.48){
-                *(pObjects + k) = new Prey(k, sBoidID, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, sHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                          realRadius); //the radius of the ball in .obj file is 2.4
+                                          realRadius, sBodyID, sTailID); //the radius of the ball in .obj file is 2.4
             } else if(tempRadius < 1.98){
-                *(pObjects + k) = new Prey(k, mBoidID, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, mHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                           realRadius);
+                                           realRadius, mBodyID, mTailID);
             } else {
-                *(pObjects + k) = new Prey(k, lBoidID, false, orientations.at(k), positions.at(k),
+                *(pObjects + k) = new Prey(k, lHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                           realRadius);
+                                           realRadius, lBodyID, lTailID);
             }
 
         }

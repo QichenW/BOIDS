@@ -66,7 +66,7 @@ void BoundaryDetector::detectAll(Object **all, int numberOfObjects) {
             } else{ //detecting if collision with another
                 b2 = ((Prey *) all[j]);
                 // add a neighbour if close enough
-                if(VectorCalculation::getDistance(b1->getTranslation(), b2->getTranslation()) <= b1->vicinityRadius){
+                if(VectorCalculation::getDistance(b1->apprxCentroid,b2->apprxCentroid) <= b1->vicinityRadius){
                     b1->vectorOfNeighbours.push_back(b2);
                 }
             }

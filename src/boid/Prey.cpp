@@ -11,12 +11,12 @@ const GLfloat Prey::DEFAULT_DIRECTION[3]= {1,0,0};
 int Prey::amount = 0;
 GLfloat Prey::biggestRadius = 1.0;
 GLfloat Prey::goal[3] = {};
-GLfloat Prey::centroid[3] = {};
+GLfloat Prey::flockCentroid[3] = {};
 
 /**
  *  Prey is a subclass of Object
  * @param oId - id
- * @param lId - polygon list id
+ * @param mainListId - polygon list id
  * @param om - mass
  * @param isF - is fixed (should be false)
  * @param orienttn - initial orientation
@@ -25,11 +25,13 @@ GLfloat Prey::centroid[3] = {};
  * @param angularVelocity - initial angular velocity
  * @param r - radius
  */
-Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
-           GLfloat *translatn, GLfloat *velocity, GLfloat r)
-        : Object(oId, lId, isF, orienttn, translatn) { // call the base class constructor first
+Prey::Prey(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
+           GLfloat *translatn, GLfloat *velocity, GLfloat r, GLuint bLId, GLuint tLId)
+        : Object(oId, hLID, isF, orienttn, translatn) { // call the base class constructor first
     int i;
     radius = r;
+    bodyListId = bLId;
+    tailListId = tLId;
     for (i = 0; i < 3; i++) {
         *(acclrtn + i) = 0;
         *(Prey::velocity + i) = *(velocity + i);
@@ -38,6 +40,7 @@ Prey::Prey(int oId, int lId, bool isF, GLfloat *orienttn,
     rotateBodyAndSetTranslation(Prey::velocity);
    //TODO subject to change
     vicinityRadius = 10 * radius;
+    setIndividualCentroid();
 }
 
 /***
@@ -110,7 +113,7 @@ void Prey::getCombinedDesires() {
         alignmentDesire[0] += currentNeighbour->velocity[0] - velocity[0];
         alignmentDesire[1] += currentNeighbour->velocity[1] - velocity[1];
         alignmentDesire[2] += currentNeighbour->velocity[2] - velocity[2];
-        if (VectorCalculation::getDistance(translation, currentNeighbour->translation) <=
+        if (VectorCalculation::getDistance(apprxCentroid, currentNeighbour->apprxCentroid) <=
             2 * radius + 2 * currentNeighbour->radius) {
             separationDesire[0] += translation[0] - currentNeighbour->translation[0];
             separationDesire[1] += translation[1] - currentNeighbour->translation[1];
@@ -176,10 +179,10 @@ void Prey::rotateBodyAndSetTranslation(GLfloat *newVelo) {
  * update the centroid equivalent of the group of boids
  * @param sumOfPos the sum of the positions of boids
  */
-void Prey::updateCentroid(GLfloat *sumOfPos) {
+void Prey::updateFlockCentroid(GLfloat *sumOfPos) {
     int i;
     for(i = 0; i < 3; i++){
-        centroid[i] = *(sumOfPos + i) / amount;
+        flockCentroid[i] = *(sumOfPos + i) / amount;
     }
 }
 
@@ -188,7 +191,7 @@ void Prey::updateCentroid(GLfloat *sumOfPos) {
  * otherwise randomly update the goal
  */
 void Prey::updateGoal() {
-    if (VectorCalculation::getDistance(goal, centroid) > amount / 2 * biggestRadius){
+    if (VectorCalculation::getDistance(goal, flockCentroid) > amount / 2 * biggestRadius){
        return;
     }
     goal[0] = rand() % 187 - 93;
@@ -197,4 +200,19 @@ void Prey::updateGoal() {
     cout<< goal[1] <<'\t';
     goal[2] = rand()%87 - 43;
     cout<< goal[2] <<endl;
+}
+
+/**
+ * The approximate position of the center of the fish, (translation is the position of fish head)
+ */
+void Prey::setIndividualCentroid() {
+    int i;
+    GLfloat unitTravelDirection[3];
+    VectorCalculation::getUnitDirection(unitTravelDirection, velocity);
+    //TODO this may be determined when drawing articulated figure
+    for (i = 0; i < 3; i++) {
+        // This is an approximation
+        apprxCentroid[i] = (GLfloat) (translation[i] - 0.5 * radius * unitTravelDirection[i]);
+    }
+
 }

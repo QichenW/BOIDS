@@ -64,11 +64,12 @@ void drawFrame() {
         ((Prey *) objects[i])->getCombinedDesires();
         //move the boid
         ((Prey *) objects[i])->updateFlattenedTransformationMatrix(increment);
+        ((Prey *) objects[i])->setIndividualCentroid();
         tempSum[0] += objects[i]->getTranslation()[0];
         tempSum[1] += objects[i]->getTranslation()[1];
         tempSum[2] += objects[i]->getTranslation()[2];
     }
-    Prey::updateCentroid(tempSum);
+    Prey::updateFlockCentroid(tempSum);
     DrawObjects::draw(objects);
 
     glPopMatrix();

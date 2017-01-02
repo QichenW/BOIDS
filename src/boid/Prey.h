@@ -21,8 +21,8 @@ using namespace std;
 class Prey: public Object {
 public:
     static int amount;
-    Prey(int oId, int lId, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
-              GLfloat r);
+    Prey(int oId, GLuint hLID, bool isF, GLfloat *orienttn, GLfloat *translatn, GLfloat *velocity,
+              GLfloat r, GLuint bLId, GLuint tListId);
     void updateFlattenedTransformationMatrix(GLfloat t);
 
     GLfloat radius;
@@ -30,12 +30,14 @@ public:
     GLfloat getVelocityIn(const int direction);
     GLfloat velocity[3];
     GLfloat acclrtn[3];
+    GLfloat apprxCentroid[3];
 
     void getCombinedDesires();
+    void setIndividualCentroid();
 
     vector<Prey *> vectorOfNeighbours;
 
-    static void updateCentroid(GLfloat sumOfPos[3]);
+    static void updateFlockCentroid(GLfloat sumOfPos[3]);
 
     static void updateGoal();
 
@@ -51,8 +53,10 @@ private:
 
     void rotateBodyAndSetTranslation(GLfloat *newVelo);
 
-    static GLfloat centroid[3];
+    static GLfloat flockCentroid[3];
     static GLfloat goal[3];
+    GLuint bodyListId;
+    GLuint tailListId;
 };
 
 #endif //BOIDS_PREY_H

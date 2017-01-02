@@ -9,7 +9,7 @@
  */
 Object::Object(int id, GLuint listId, bool isFixed, GLfloat *orientation, GLfloat *translation) {
     Object::id = id;
-    Object::listId = listId;
+    Object::mainListId = listId;
     Object::isFixed = isFixed;
 
     int i;
@@ -34,7 +34,7 @@ void Object::setFlattenedTransformationMatrix(GLfloat *flattenedTransformationMa
 }
 
 GLuint Object::getListId() {
-    return listId;
+    return mainListId;
 }
 
 GLfloat *Object::getFlattenedTransformationMatrix() {
