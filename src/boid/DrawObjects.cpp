@@ -46,7 +46,9 @@ void DrawObjects::draw(Object **objects) {
         glMultMatrixf(combinedFlatTransformation);
         glCallList(fish->bodyListId);
         glPopMatrix();
-        //TODO may set individual centroid as the centroid of body here
+        //set individual centroid as the centroid of body here
+        fish->setIndividualCentroid(combinedFlatTransformation[12], combinedFlatTransformation[13],
+                                    combinedFlatTransformation[14]);
         //Draw fish tail
         glPushMatrix();
         RotationHelper::rightDotProduct(combinedFlatTransformation, fish->tailAlignFlat2);

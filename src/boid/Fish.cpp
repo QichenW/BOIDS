@@ -47,7 +47,7 @@ Fish::Fish(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
     rotateBodyAndSetTranslation(Fish::velocity);
    //TODO subject to change
     vicinityRadius = 10 * radius;
-    setIndividualCentroid();
+    setIndividualCentroid(*translatn, *(translatn + 1), *(translatn + 2));
     setAlignFlatMatrices();
     bodyLocalRotation[1] = rand()%(2 * (int) BODY_ANGLE_MARGIN + 1) - BODY_ANGLE_MARGIN;
 }
@@ -212,17 +212,10 @@ void Fish::updateGoal() {
 
 /**
  * The approximate position of the center of the fish, (translation is the position of fish head)
+ * which is determined when drawing the body of the fish
  */
-void Fish::setIndividualCentroid() {
-    int i;
-    GLfloat unitTravelDirection[3];
-    VectorCalculation::getUnitDirection(unitTravelDirection, velocity);
-    //TODO this may be determined when drawing articulated figure
-    for (i = 0; i < 3; i++) {
-        // This is an approximation
-        apprxCentroid[i] = (GLfloat) (translation[i] - 0.5 * radius * unitTravelDirection[i]);
-    }
-
+void Fish::setIndividualCentroid(GLfloat x, GLfloat y, GLfloat z) {
+      apprxCentroid[0] = x; apprxCentroid[1] = y; apprxCentroid[2] =z;
 }
 
 /**

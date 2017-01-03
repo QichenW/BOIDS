@@ -35,7 +35,7 @@ public:
     GLfloat tailLocalRotation[3] = {};
 
     void getCombinedDesires();
-    void setIndividualCentroid();
+    void setIndividualCentroid(GLfloat x, GLfloat y, GLfloat z);
 
     vector<Fish *> vectorOfNeighbours;
 
@@ -72,7 +72,7 @@ private:
     void setAlignFlatMatrices();
 
     int scaleMultiplier;
-    GLfloat deltaAngle = 10; //may change
+    GLfloat deltaAngle = 8; //may change
 };
 
 #endif //BOIDS_PREY_H
