@@ -4,6 +4,8 @@
 //  Copyright © 2016 Qichen Wang. All rights reserved.
 //
 
+#include <Lsystem/Branch.h>
+#include <Lsystem/DrawBranches.h>
 #include "boid/BoundaryDetector.h"
 #include "UserInputManager.h"
 #include "StringUtils.h"
@@ -13,6 +15,9 @@ using namespace std;
 Object *objects[50];
 PhysicsPrefs prefs;
 GLfloat increment = 0.03;
+//TODO add this to script
+GLfloat flattenedForReef[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -35, 0, 1};
+GLfloat flattenedForReef_2[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 20, -35, -40, 1};
 int window;
 
 void drawFrame();
@@ -40,6 +45,8 @@ void displayObject() {
     if(objects[0]!= nullptr) {
         DrawObjects::draw(objects);
     }
+    //TODO test this
+    DrawBranches::draw(Branch::listOfNodes);
 }
 
 /****
@@ -49,8 +56,8 @@ void drawFrame() {
     glLoadIdentity();
     glPushMatrix();
     //move the model view away from the camera, so that we are not inside the object
-    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-180,1});
-//   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
+//    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-180,1});
+   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
     glColor3f(0.1, 0.45, 0.1);
     int i;
     GLfloat tempSum[3] = {};
@@ -70,7 +77,8 @@ void drawFrame() {
     }
     Fish::updateFlockCentroid(tempSum);
     DrawObjects::draw(objects);
-
+    //TODO test this
+    DrawBranches::draw(Branch::listOfNodes);
     glPopMatrix();
 }
 
@@ -112,6 +120,10 @@ int main(int argc, char **argv) {
     UserInputManager::createMouseMenu();
     //TODO fix this, this function is also called in userInputManager
     DrawObjects::prepareObjects(&prefs,objects);
+    //prepare the reef
+    Branch(0, flattenedForReef);
+    Branch(0, flattenedForReef_2);
+    DrawBranches::prepare();
     glutMainLoop();
     return 0;
 }

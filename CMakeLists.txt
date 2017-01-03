@@ -12,7 +12,7 @@ set(SOURCE_FILES src/main.cpp src/setup/SimpleObjLoader.cpp src/setup/SimpleObjL
         src/boid/Fish.cpp src/boid/Fish.h src/boid/DrawObjects.cpp
         src/matrix/RotationHelper.cpp src/matrix/RotationHelper.h src/boid/DrawObjects.h
         src/boid/BoundaryDetector.cpp src/boid/BoundaryDetector.h
-        src/matrix/VectorCalculation.cpp src/matrix/VectorCalculation.h)
+        src/matrix/VectorCalculation.cpp src/matrix/VectorCalculation.h src/Lsystem/Branch.cpp src/Lsystem/Branch.h src/Lsystem/DrawBranches.cpp src/Lsystem/DrawBranches.h)
 
 #########################################################
 # Include Files
@@ -46,7 +46,7 @@ target_link_libraries(BOIDS ${EXTRA_LIBS} nativefiledialog)
 if (NOT CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_CURRENT_BINARY_DIR)
 
     # list of files for which we add a copy rule
-    set(object_files wall.obj wall2.obj fishBody.obj fish_body.obj fish_head.obj fish_tail.obj)
+    set(object_files wall.obj wall2.obj branch.obj fish_body.obj fish_head.obj fish_tail.obj)
 
     foreach(item IN LISTS object_files)
         message(STATUS ${item})
@@ -62,7 +62,7 @@ endif()
 add_custom_target(obj ALL DEPENDS
         "${CMAKE_CURRENT_BINARY_DIR}/wall.obj"
         "${CMAKE_CURRENT_BINARY_DIR}/wall2.obj"
-        "${CMAKE_CURRENT_BINARY_DIR}/fishBody.obj"
+        "${CMAKE_CURRENT_BINARY_DIR}/branch.obj"
         "${CMAKE_CURRENT_BINARY_DIR}/fish_body.obj"
         "${CMAKE_CURRENT_BINARY_DIR}/fish_tail.obj"
         "${CMAKE_CURRENT_BINARY_DIR}/fish_head.obj")

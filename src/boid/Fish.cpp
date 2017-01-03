@@ -99,7 +99,7 @@ void Fish::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cD
     VectorCalculation::getUnitDirection(directionToGoal, directionToGoal);
     int i;
     for(i = 0; i< 3; i++){
-        combinedDesire[i] += *(sDesire + i) * 50 + *(aDesire + i) * 10 + *(cDesire + i) * 10;
+        combinedDesire[i] += *(sDesire + i) * 50 + *(aDesire + i) * 20 + *(cDesire + i) * 20;
     }
     for(i = 0; i< 3; i++){
         combinedDesire[i] += 20 * directionToGoal[i];
