@@ -16,9 +16,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cdfceccd-108c-4504-a21c-1581db8718bd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/DrawObjects.cpp" afterPath="$PROJECT_DIR$/src/boid/DrawObjects.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/Fish.cpp" afterPath="$PROJECT_DIR$/src/boid/Fish.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/boid/Fish.h" afterPath="$PROJECT_DIR$/src/boid/Fish.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
     </list>
     <ignored path="BOIDS.iws" />
@@ -40,11 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="53" column="30" lean-forward="true" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+            <state relative-caret-position="1260">
+              <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -53,8 +51,8 @@
       <file leaf-file-name="2_different_balls.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/2_different_balls.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+            <state relative-caret-position="165">
+              <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -63,8 +61,8 @@
       <file leaf-file-name="DrawObjects.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/boid/DrawObjects.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="48" column="10" lean-forward="false" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+            <state relative-caret-position="-135">
+              <caret line="34" column="32" lean-forward="false" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
               <folding>
                 <element signature="e#43#62#0" expanded="true" />
               </folding>
@@ -75,8 +73,8 @@
       <file leaf-file-name="SimpleObjLoader.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/setup/SimpleObjLoader.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="149" column="11" lean-forward="false" selection-start-line="149" selection-start-column="11" selection-end-line="149" selection-end-column="11" />
+            <state relative-caret-position="513">
+              <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -92,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fish.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Fish.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/boid/Fish.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="217" column="52" lean-forward="false" selection-start-line="217" selection-start-column="52" selection-end-line="217" selection-end-column="52" />
+            <state relative-caret-position="-3149">
+              <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -180,13 +178,13 @@
         <option value="$PROJECT_DIR$/src/boid/Prey.h" />
         <option value="$PROJECT_DIR$/src/matrix/RotationHelper.h" />
         <option value="$PROJECT_DIR$/src/matrix/RotationHelper.cpp" />
-        <option value="$PROJECT_DIR$/data/2_different_balls.txt" />
         <option value="$PROJECT_DIR$/src/ui/StringUtils.cpp" />
         <option value="$PROJECT_DIR$/src/boid/Fish.h" />
         <option value="$PROJECT_DIR$/src/setup/SimpleObjLoader.cpp" />
         <option value="$PROJECT_DIR$/src/boid/DrawObjects.cpp" />
-        <option value="$PROJECT_DIR$/src/boid/Fish.cpp" />
+        <option value="$PROJECT_DIR$/data/2_different_balls.txt" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/src/boid/Fish.cpp" />
       </list>
     </option>
   </component>
@@ -198,8 +196,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="602" />
-    <option name="y" value="23" />
+    <option name="x" value="324" />
+    <option name="y" value="27" />
     <option name="width" value="1287" />
     <option name="height" value="1053" />
   </component>
@@ -552,7 +550,7 @@
       <workItem from="1483095261829" duration="2110000" />
       <workItem from="1483181514956" duration="7438000" />
       <workItem from="1483322419373" duration="16664000" />
-      <workItem from="1483350638604" duration="16149000" />
+      <workItem from="1483350638604" duration="20658000" />
     </task>
     <task id="LOCAL-00001" summary="second">
       <created>1481606037645</created>
@@ -666,11 +664,18 @@
       <option name="project" value="LOCAL" />
       <updated>1483402327316</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="now individual centroid is fixed">
+      <created>1483411031335</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1483411031335</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134532000" />
+    <option name="totallyTimeSpent" value="139041000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -682,7 +687,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="602" y="23" width="1287" height="1053" extended-state="0" />
+    <frame x="324" y="27" width="1287" height="1053" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22827804" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -752,7 +757,8 @@
     <MESSAGE value="fish centroid added to determine distance, may need tweek" />
     <MESSAGE value="fish centroid added to determine distance, may need tweaking; boid class renamed as Fish" />
     <MESSAGE value="now fish is articulated" />
-    <option name="LAST_COMMIT_MESSAGE" value="now fish is articulated" />
+    <MESSAGE value="now individual centroid is fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="now individual centroid is fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1029,14 +1035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/2_different_balls.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/StringUtils.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1061,22 +1059,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/setup/SimpleObjLoader.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="149" column="11" lean-forward="false" selection-start-line="149" selection-start-column="11" selection-end-line="149" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/boid/Fish.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="217" column="52" lean-forward="false" selection-start-line="217" selection-start-column="52" selection-end-line="217" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/boid/Fish.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-270">
@@ -1087,20 +1069,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/setup/SimpleObjLoader.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/boid/DrawObjects.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="48" column="10" lean-forward="false" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+        <state relative-caret-position="-135">
+          <caret line="34" column="32" lean-forward="false" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
           <folding>
             <element signature="e#43#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/2_different_balls.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="53" column="30" lean-forward="true" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+        <state relative-caret-position="1260">
+          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/boid/Fish.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3149">
+          <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
           <folding />
         </state>
       </provider>

@@ -84,7 +84,6 @@ void display(void) {
         // if there is no user input, show an walking in straight line animation
         displayObject();
     } else {
-//tODO
         drawFrame();
     }
     glutSwapBuffers(); //swap the buffers
