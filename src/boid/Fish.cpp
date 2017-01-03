@@ -7,7 +7,13 @@ const int Fish::X_DIRECTION = 0;
 const int Fish::Y_DIRECTION = 1;
 const int Fish::Z_DIRECTION = 2;
 const GLfloat Fish::MAX_VELOCITY= 30;
+GLfloat ZERO_VECTOR[3]= {0,0,0}; //TODO why this cannot be a field
+const GLfloat Fish::BODY_ANGLE_MARGIN= 35;
 const GLfloat Fish::DEFAULT_DIRECTION[3]= {1,0,0};
+const GLfloat Fish::BODY_UNIT_ALIGN_1[3]= {-1,0,0};
+const GLfloat Fish::BODY_UNIT_ALIGN_2[3]= {-1,0,0};
+const GLfloat Fish::TAIL_UNIT_ALIGN_1[3]= {-1,0,0};
+const GLfloat Fish::TAIL_UNIT_ALIGN_2[3]= {-1,0,0};
 int Fish::amount = 0;
 GLfloat Fish::biggestRadius = 1.0;
 GLfloat Fish::goal[3] = {};
@@ -26,10 +32,11 @@ GLfloat Fish::flockCentroid[3] = {};
  * @param r - radius
  */
 Fish::Fish(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
-           GLfloat *translatn, GLfloat *velocity, GLfloat r, GLuint bLId, GLuint tLId)
+           GLfloat *translatn, GLfloat *velocity, GLfloat r, GLuint bLId, GLuint tLId, int scaleM)
         : Object(oId, hLID, isF, orienttn, translatn) { // call the base class constructor first
     int i;
     radius = r;
+    scaleMultiplier = scaleM;
     bodyListId = bLId;
     tailListId = tLId;
     for (i = 0; i < 3; i++) {
@@ -41,6 +48,8 @@ Fish::Fish(int oId, GLuint hLID, bool isF, GLfloat *orienttn,
    //TODO subject to change
     vicinityRadius = 10 * radius;
     setIndividualCentroid();
+    setAlignFlatMatrices();
+    bodyLocalRotation[1] = rand()%(2 * (int) BODY_ANGLE_MARGIN + 1) - BODY_ANGLE_MARGIN;
 }
 
 /***
@@ -171,7 +180,6 @@ void Fish::rotateBodyAndSetTranslation(GLfloat *newVelo) {
     }
     GLfloat quatForAlignment[4] = {cosf(halfAngle), sinf(halfAngle) * axis_q[0], sinf(halfAngle) * axis_q[1],
                                    sinf(halfAngle) * axis_q[2]};
-    //TODO this function is tested
     setFlattenedTransformationMatrix(RotationHelper::getFlattenedMatrixWithQuatAndTrans(
             translation, quatForAlignment));
 }
@@ -215,4 +223,46 @@ void Fish::setIndividualCentroid() {
         apprxCentroid[i] = (GLfloat) (translation[i] - 0.5 * radius * unitTravelDirection[i]);
     }
 
+}
+
+/**
+ * This method is for aligning parts in the articulated fish
+ */
+void Fish::setAlignFlatMatrices() {
+    float fb[3],sb[3],ft[3],st[3];
+    int i;
+    for (i = 0; i < 3; i++){
+        fb[i] = BODY_UNIT_ALIGN_1[i] * scaleMultiplier;
+        sb[i] = BODY_UNIT_ALIGN_2[i] * scaleMultiplier;
+        ft[i] = TAIL_UNIT_ALIGN_1[i] * scaleMultiplier;
+        st[i] = TAIL_UNIT_ALIGN_2[i] * scaleMultiplier;
+    }
+    float *temp = RotationHelper::generateFlattenedTransformationMatrix(ZERO_VECTOR, fb, false);
+    for (i = 0; i< 16; i++){
+        *(bodyAlignFlat1 + i) = *(temp+ i);
+    }
+    temp = RotationHelper::generateFlattenedTransformationMatrix(ZERO_VECTOR, sb, false);
+    for (i = 0; i< 16; i++){
+        *(bodyAlignFlat2 + i) = *( temp + i);
+    }
+    temp = RotationHelper::generateFlattenedTransformationMatrix(ZERO_VECTOR, ft, false);
+    for (i = 0; i< 16; i++){
+        *(tailAlignFlat1 + i) = *( temp + i);
+    }
+    temp = RotationHelper::generateFlattenedTransformationMatrix(ZERO_VECTOR, st, false);
+    for (i = 0; i< 16; i++){
+        *(tailAlignFlat2 + i) = *( temp + i);
+    }
+}
+
+/**
+ * the body and tail each has one degree of freedom.
+ */
+void Fish::rotateBodyAndTail() {
+    //TODO increment the angles
+    if(bodyLocalRotation[1] >= BODY_ANGLE_MARGIN || bodyLocalRotation[1] <= -1 * BODY_ANGLE_MARGIN){
+        deltaAngle *= -1;
+    }
+    bodyLocalRotation[1] += deltaAngle;
+    tailLocalRotation[1] = (GLfloat) (-1.4 * bodyLocalRotation[1]);
 }

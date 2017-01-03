@@ -24,7 +24,7 @@ class RotationHelper
 {
 public:
     static float* generateFlattenedTransformationMatrix(float *tuple, float *trip, bool isQuaternion);
-
+    static void rightDotProduct(GLfloat dest[16], GLfloat operand[16]);
     static void rotateAvectorWithQuaternion(GLfloat dest[3], GLfloat quat[4], GLfloat src[3]);
 
     static GLfloat *

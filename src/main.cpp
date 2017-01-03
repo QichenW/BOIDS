@@ -38,7 +38,6 @@ void displayObject() {
 
     //TODO insert real local rotation and translation
     if(objects[0]!= nullptr) {
-
         DrawObjects::draw(objects);
     }
 }
@@ -65,6 +64,7 @@ void drawFrame() {
         //move the boid
         ((Fish *) objects[i])->updateFlattenedTransformationMatrix(increment);
         ((Fish *) objects[i])->setIndividualCentroid();
+        ((Fish *) objects[i])->rotateBodyAndTail();
         tempSum[0] += objects[i]->getTranslation()[0];
         tempSum[1] += objects[i]->getTranslation()[1];
         tempSum[2] += objects[i]->getTranslation()[2];

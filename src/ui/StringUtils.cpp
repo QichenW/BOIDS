@@ -8,9 +8,9 @@
 #include "StringUtils.h"
 
 static const char * strReqestMouseInput ="Right click and load a setup (.txt) file";
-static const char *strFileLoaded =" selected, start animation or reset";
+static const char *strFileLoaded =" loaded, start animation or reset";
 static const char *strWalls =" walls";
-static const char *strBalls =" balls & ";
+static const char *strFish =" fish & ";
 static char *strStatusInfo;
 
 /****
@@ -23,7 +23,7 @@ void UserInterfaceManager::printMessageForBouncingBalls(int numberOfObjs, int nu
     } else {
         numberOfStrs = isPlaying ? 4 : 5;
             strStatusInfo = buildString( numberOfObjs - numberOfWalls, numberOfWalls,
-                    (const char *[]) {strBalls, strWalls, strFileLoaded}, numberOfStrs);
+                    (const char *[]) {strFish, strWalls, strFileLoaded}, numberOfStrs);
     }
     printInWindow(strStatusInfo, !isPlaying);
 }

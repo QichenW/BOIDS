@@ -8,9 +8,9 @@
 #include "DrawObjects.h"
 
 const char * DrawObjects::HEAD_OBJ_MAME = "fish_head.obj";
-//const char * DrawObjects::BODY_OBJ_MAME = "fish_body.obj";
+const char * DrawObjects::BODY_OBJ_MAME = "fish_body.obj";
 const char * DrawObjects::TAIL_OBJ_MAME = "fish_tail.obj";
-const char * DrawObjects::BODY_OBJ_MAME = "fishBody.obj";
+//const char * DrawObjects::BODY_OBJ_MAME = "fishBody.obj";
 const char * DrawObjects::WALL_OBJ_NAME= "wall.obj";
 const char * DrawObjects::WALL_2_OBJ_NAME= "wall2.obj";
 int DrawObjects::numberOfObjects;
@@ -20,21 +20,44 @@ const int DrawObjects::NUMBER_OF_WALLS = 6;
 
 void DrawObjects::draw(Object **objects) {
     int i;
-
-    for (i = 0; i < numberOfObjects; i++) {
-        if(objects[i]->isFixed) {
+    Fish * fish;
+    for (i = 0; i < NUMBER_OF_WALLS; i++) {
             glPushMatrix();
             glMultMatrixf(objects[i]->getFlattenedTransformationMatrix());
             glCallList(objects[i]->getListId());
             glPopMatrix();
-        } else {
-            //TODO draw articulated figures
-            Fish * fish = (Fish *) objects[i];
-            glPushMatrix();
-            glMultMatrixf(fish->getFlattenedTransformationMatrix());
-            glCallList(fish->getListId());
-            glPopMatrix();
-        }
+    }
+    for (i = NUMBER_OF_WALLS; i < numberOfObjects; i++){
+        GLfloat combinedFlatTransformation[16] = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+        //Draw fish head
+        fish = (Fish *) objects[i];
+        glPushMatrix();
+        glMultMatrixf(fish->getFlattenedTransformationMatrix());
+        glCallList(fish->getListId());
+        glPopMatrix();
+        //Draw fish body
+        glPushMatrix();
+        RotationHelper::rightDotProduct(combinedFlatTransformation, fish->getFlattenedTransformationMatrix());
+        RotationHelper::rightDotProduct(combinedFlatTransformation, fish->bodyAlignFlat2);
+        RotationHelper::rightDotProduct(combinedFlatTransformation,
+                                        RotationHelper::generateFlattenedTransformationMatrix(
+                                                fish->bodyLocalRotation, nullptr, false));
+        RotationHelper::rightDotProduct(combinedFlatTransformation, fish->bodyAlignFlat1);
+        glMultMatrixf(combinedFlatTransformation);
+        glCallList(fish->bodyListId);
+        glPopMatrix();
+        //TODO may set individual centroid as the centroid of body here
+        //Draw fish tail
+        glPushMatrix();
+        RotationHelper::rightDotProduct(combinedFlatTransformation, fish->tailAlignFlat2);
+        RotationHelper::rightDotProduct(combinedFlatTransformation,
+                                        RotationHelper::generateFlattenedTransformationMatrix(
+                                                fish->tailLocalRotation, nullptr, false));
+        RotationHelper::rightDotProduct(combinedFlatTransformation, fish->tailAlignFlat1);
+        glMultMatrixf(combinedFlatTransformation);
+        glCallList(fish->tailListId);
+        glPopMatrix();
+
     }
 }
 
@@ -99,15 +122,15 @@ void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
             if(tempRadius<1.48){
                 *(pObjects + k) = new Fish(k, sHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                          realRadius, sBodyID, sTailID); //the radius of the ball in .obj file is 2.4
+                                          realRadius, sBodyID, sTailID, tempRadius); //the radius of the ball in .obj file is 2.4
             } else if(tempRadius < 1.98){
                 *(pObjects + k) = new Fish(k, mHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                           realRadius, mBodyID, mTailID);
+                                           realRadius, mBodyID, mTailID, tempRadius);
             } else {
                 *(pObjects + k) = new Fish(k, lHeadID, false, orientations.at(k), positions.at(k),
                                            velocities .at(k - NUMBER_OF_WALLS),
-                                           realRadius, lBodyID, lTailID);
+                                           realRadius, lBodyID, lTailID, tempRadius);
             }
 
         }
