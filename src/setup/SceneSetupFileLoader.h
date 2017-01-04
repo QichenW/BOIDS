@@ -6,7 +6,7 @@
 #define BOIDS_PHYSICSSETUPFILELOADER_H
 
 #include "boid/Object.h"
-#include "PhysicsPrefs.h"
+#include "ScenePrefs.h"
 
 #if defined(__APPLE__)
 #include <GLUT/glut.h>
@@ -16,9 +16,9 @@
 #include <GL/glut.h>
 #endif
 
-class PhysicsSetupFileLoader {
+class SceneSetupFileLoader {
 public:
-    static void loadPreferencesFromTextFile(char *path, PhysicsPrefs *prefs);
+    static void loadPreferencesFromTextFile(char *path, ScenePrefs *prefs);
 };
 
 

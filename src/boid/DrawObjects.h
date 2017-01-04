@@ -10,7 +10,7 @@
 #include "matrix/RotationHelper.h"
 #if defined(__APPLE__)
 #include <GLUT/glut.h>
-#include "setup/PhysicsPrefs.h"
+#include "setup/ScenePrefs.h"
 #include <vector>
 
 
@@ -27,7 +27,7 @@ public:
     static const int NUMBER_OF_WALLS;
 
 
-    static void prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects);
+    static void prepareObjects(ScenePrefs *pPrefs, Object **pObjects);
 
 private:
     static const char* HEAD_OBJ_MAME;

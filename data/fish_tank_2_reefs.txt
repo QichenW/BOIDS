@@ -1,0 +1,77 @@
+n 12
+
+p      100   0      0
+p     -100   0      0
+p       0   50     0
+p       0  -50     0
+p       0   0      50
+p       0   0      -50
+
+p       20   0      -40
+p       30   0     -40
+p       10   0     -40
+p       20   -10     40
+p       -20   -10     40
+p       40   10    40
+p       -40   10     40
+
+e         0  0     90
+e         0  0     90
+e         0  0     0
+e         0  0     0
+e         90  0     0
+e         90  0     0
+
+e         0  0     0
+e         0  0     0
+e         0  0     0
+e         0  0     0
+e         0  0     0
+e         0  0     0
+e         0  0     0
+
+v         -1  2     1
+v         -8  9     0
+v         0  5     5
+v         -10  0     0
+v         -10  0     0
+v         -10  0     0
+v         -10  0     0
+
+a         0  0     0
+a         0  0     0
+a         0  0     0
+a         0  0     0
+a         0  0     0
+a         0  0     0
+a         0  0     0
+
+r 2 2 1.5 1.5 1 1
+
+x 2
+j 0    45   0
+j 0    0    0
+k -15    999  0
+k 20   999  40
+s 3 1
+
+### lines start with "#" are comments; in-line comments are NOT supported.
+### n number of walls plus number of fish
+### p position for walls and fish
+### e euler angle representing orientation for walls and fish
+
+### v initial velocity of fish
+### a initial angular velocity of fish
+### r the radius of the enclosing sphere of fish (now can be 1, 1.5, 2)
+### x the number of reefs
+### j the euler angle representing orientation of reefs
+### k the position of reefs
+### s are the sizes of reefs (now can be 3,2,1)
+
+###IMPORTANT:
+### the p lines for tank/box must goes immediately after the n line
+### the first 6 P lines and e lines are for walls of the tank/box
+### p, e, v, a lines should be in the same order (there are no v or a lines for walls of tank/box)
+### j, k lines should be in the same order and goes immediately after the x line
+### the second float value in a k line is just a place holder, the actual value will be calculated when
+### the corresponding s value is loaded

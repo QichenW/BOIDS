@@ -22,7 +22,7 @@ public:
     int currentLevel;
     GLfloat flattenedMatrix[16] = {};
 private:
-    static const int NUM_OF_LEVELS;
+    static const int LOWEST_LEVEL;
     static const GLfloat UNIT_CHILD_1_TRANS_1[3];
     static const GLfloat UNIT_CHILD_1_TRANS_2[3];
     static const GLfloat CHILD_1_ROTTN[3];

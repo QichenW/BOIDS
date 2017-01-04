@@ -13,11 +13,8 @@
 using namespace std;
 
 Object *objects[50];
-PhysicsPrefs prefs;
+ScenePrefs prefs;
 GLfloat increment = 0.03;
-//TODO add this to script
-GLfloat flattenedForReef[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -35, 0, 1};
-GLfloat flattenedForReef_2[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 20, -35, -40, 1};
 int window;
 
 void drawFrame();
@@ -41,11 +38,11 @@ void displayObject() {
     //move the model view away from the camera, so that we are not inside the object1
     glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
 
-    //TODO insert real local rotation and translation
     if(objects[0]!= nullptr) {
+        // draw walls and fish
         DrawObjects::draw(objects);
     }
-    //TODO test this
+    // draw reefs
     DrawBranches::draw(Branch::listOfNodes);
 }
 
@@ -56,8 +53,8 @@ void drawFrame() {
     glLoadIdentity();
     glPushMatrix();
     //move the model view away from the camera, so that we are not inside the object
-//    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-180,1});
-   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
+    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-100,1});
+//   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
     glColor3f(0.1, 0.45, 0.1);
     int i;
     GLfloat tempSum[3] = {};
@@ -70,15 +67,20 @@ void drawFrame() {
         ((Fish *) objects[i])->getCombinedDesires();
         //move the boid
         ((Fish *) objects[i])->updateFlattenedTransformationMatrix(increment);
+        // let the articulated body and fish rotate
         ((Fish *) objects[i])->rotateBodyAndTail();
+        // add up the individual centroids of fish
         tempSum[0] += objects[i]->getTranslation()[0];
         tempSum[1] += objects[i]->getTranslation()[1];
         tempSum[2] += objects[i]->getTranslation()[2];
     }
+    // get the group centroid
     Fish::updateFlockCentroid(tempSum);
+    //draw walls and fish
     DrawObjects::draw(objects);
-    //TODO test this
+    // draw reefs
     DrawBranches::draw(Branch::listOfNodes);
+
     glPopMatrix();
 }
 
@@ -118,12 +120,6 @@ int main(int argc, char **argv) {
     UserInputManager(&window, &prefs, objects);
 
     UserInputManager::createMouseMenu();
-    //TODO fix this, this function is also called in userInputManager
-    DrawObjects::prepareObjects(&prefs,objects);
-    //prepare the reef
-    Branch(0, flattenedForReef);
-    Branch(0, flattenedForReef_2);
-    DrawBranches::prepare();
     glutMainLoop();
     return 0;
 }

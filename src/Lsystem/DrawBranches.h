@@ -8,7 +8,7 @@
 #include "matrix/RotationHelper.h"
 #if defined(__APPLE__)
 #include <GLUT/glut.h>
-#include "setup/PhysicsPrefs.h"
+#include "setup/ScenePrefs.h"
 #include "Branch.h"
 #include <vector>
 
@@ -22,15 +22,17 @@ class DrawBranches {
 public:
     static void draw(vector<Branch> v);
 
-    static void prepare();
+    static void prepare(ScenePrefs *p);
 
 
 private:
     static const char* BRANCH_OBJ_MAME;
+    static GLuint xxlBranch;
     static GLuint xlBranch;
     static GLuint lBranch;
     static GLuint mBranch;
     static GLuint sBranch;
+    static GLuint xsBranch;
 };
 
 

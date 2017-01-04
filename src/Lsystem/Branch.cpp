@@ -5,17 +5,27 @@
 #include "Branch.h"
 
 vector<Branch> Branch::listOfNodes;
-const int Branch::NUM_OF_LEVELS = 4;
+//big tree has 6 levels of branches {-1,0,1,2,3,4}
+//medium tree has 6 levels of branches {0,1,2,3,4}
+//small tree has 6 levels of branches {1,2,3,4}
+const int Branch::LOWEST_LEVEL = 4;
 const GLfloat Branch::UNIT_CHILD_1_TRANS_1[3] = {0, 15, 0};
-const GLfloat Branch::UNIT_CHILD_1_TRANS_2[3] = {0, -5, 0};
+const GLfloat Branch::UNIT_CHILD_1_TRANS_2[3] = {0, -15, 0};
 const GLfloat Branch::CHILD_1_ROTTN[3] = {45, 100, 0};
 const GLfloat Branch::UNIT_CHILD_2_TRANS_1[3] = {0, 15, 0};
-const GLfloat Branch::UNIT_CHILD_2_TRANS_2[3] = {0, 5, 0};
+const GLfloat Branch::UNIT_CHILD_2_TRANS_2[3] = {0, -5, 0};
 const GLfloat Branch::CHILD_2_ROTTN[3] = {45, 200, 0};
 const GLfloat Branch::UNIT_CHILD_3_TRANS_1[3] = {0, 15, 0};
-const GLfloat Branch::UNIT_CHILD_3_TRANS_2[3] = {0, 15, 0};
+const GLfloat Branch::UNIT_CHILD_3_TRANS_2[3] = {0, 5, 0};
 const GLfloat Branch::CHILD_3_ROTTN[3] = {45, 300, 0};
 GLfloat Branch::ZERO_VECTOR[3] = {0, 0, 0};
+
+/**
+ * recursively add to the linked list "listOfNodes" instances of Branch
+ * @param level the level of branch, used in DrawBranches to identify which GL drawing list to call
+ * to represent this branch
+ * @param fM the flattened transformation matrix for this branch.
+ */
 Branch::Branch(int level, GLfloat *fM) {
     currentLevel = level;
     childBranchSize = (GLfloat) pow(0.66, 1 + level);
@@ -23,7 +33,7 @@ Branch::Branch(int level, GLfloat *fM) {
     for(i = 0; i < 16; i++){
         *(flattenedMatrix + i) = *(fM + i);
     }
-    if (currentLevel <NUM_OF_LEVELS - 1){
+    if (currentLevel <LOWEST_LEVEL){
         GLfloat child_1_t_1[3], child_1_t_2[3], child_2_t_1[3], child_2_t_2[3], child_3_t_1[3], child_3_t_2[3];
         for(i = 0; i < 3; i++){
             child_1_t_1[i] = UNIT_CHILD_1_TRANS_1[i] * childBranchSize;

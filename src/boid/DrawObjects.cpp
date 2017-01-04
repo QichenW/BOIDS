@@ -69,7 +69,7 @@ void DrawObjects::draw(Object **objects) {
  * @param pPrefs
  * @param pObjects
  */
-void DrawObjects::prepareObjects(PhysicsPrefs *pPrefs, Object **pObjects) {
+void DrawObjects::prepareObjects(ScenePrefs *pPrefs, Object **pObjects) {
     DrawObjects::numberOfObjects = pPrefs->numberOfObjects;
     unsigned long i;
     int j,k;

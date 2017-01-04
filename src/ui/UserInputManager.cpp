@@ -3,21 +3,22 @@
 //
 
 #include <cstdlib>
-#include <setup/PhysicsPrefs.h>
+#include <setup/ScenePrefs.h>
 #include <nfd.h>
-#include <setup/PhysicsSetupFileLoader.h>
+#include <setup/SceneSetupFileLoader.h>
+#include <Lsystem/DrawBranches.h>
 #include "UserInputManager.h"
 
 static int* windowID;
 
-PhysicsPrefs *prefsPointer;
+ScenePrefs *prefsPointer;
 Object ** allObjs;
 /****
  * This function describes the behavior of the right mouse button menu.
  * @param window is the identifier the opengl window
  * @param preferences is the setup for current animation
  */
-UserInputManager::UserInputManager(int * window, PhysicsPrefs * preferences, Object ** allObjects) {
+UserInputManager::UserInputManager(int * window, ScenePrefs * preferences, Object ** allObjects) {
     windowID = window;
     prefsPointer = preferences;
     allObjs = allObjects;
@@ -30,8 +31,11 @@ void UserInputManager::setMouseMenuBehavior(int id){
             // choose the user provided text file in a "native file dialog"
             if (loadUserInputFromFileDialog()) {
                 prefsPointer->setInputLoaded(true);
-                // TODO test this,
+                // prepare walls and fish
                 DrawObjects::prepareObjects(prefsPointer, allObjs);
+                //TODO test this prepare reefs
+                DrawBranches::prepare(prefsPointer);
+
             }
             break;
         //reset the preferences
@@ -97,7 +101,7 @@ bool UserInputManager::loadUserInputFromFileDialog() {
     nfdresult_t result = NFD_OpenDialog( NULL, NULL, &outPath );
 
     if ( result == NFD_OKAY ) {
-        PhysicsSetupFileLoader::loadPreferencesFromTextFile(outPath, prefsPointer);
+        SceneSetupFileLoader::loadPreferencesFromTextFile(outPath, prefsPointer);
         puts("Success!");
         puts(outPath);
         free(outPath);

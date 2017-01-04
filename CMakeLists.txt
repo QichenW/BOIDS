@@ -7,8 +7,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES src/main.cpp src/setup/SimpleObjLoader.cpp src/setup/SimpleObjLoader.h
         src/ui/UserInputManager.cpp src/ui/UserInputManager.h src/ui/StringUtils.cpp src/ui/StringUtils.h
-        src/setup/PhysicsPrefs.cpp src/setup/PhysicsPrefs.h src/setup/PhysicsSetupFileLoader.cpp
-        src/setup/PhysicsSetupFileLoader.h src/boid/Object.cpp src/boid/Object.h
+        src/setup/ScenePrefs.cpp src/setup/ScenePrefs.h src/setup/SceneSetupFileLoader.cpp
+        src/setup/SceneSetupFileLoader.h src/boid/Object.cpp src/boid/Object.h
         src/boid/Fish.cpp src/boid/Fish.h src/boid/DrawObjects.cpp
         src/matrix/RotationHelper.cpp src/matrix/RotationHelper.h src/boid/DrawObjects.h
         src/boid/BoundaryDetector.cpp src/boid/BoundaryDetector.h
