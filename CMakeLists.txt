@@ -12,7 +12,7 @@ set(SOURCE_FILES src/main.cpp src/setup/SimpleObjLoader.cpp src/setup/SimpleObjL
         src/boid/Fish.cpp src/boid/Fish.h src/boid/DrawObjects.cpp
         src/matrix/RotationHelper.cpp src/matrix/RotationHelper.h src/boid/DrawObjects.h
         src/boid/BoundaryDetector.cpp src/boid/BoundaryDetector.h
-        src/matrix/VectorCalculation.cpp src/matrix/VectorCalculation.h src/Lsystem/Branch.cpp src/Lsystem/Branch.h src/Lsystem/DrawBranches.cpp src/Lsystem/DrawBranches.h)
+        src/matrix/VectorCalculation.cpp src/matrix/VectorCalculation.h src/Lsystem/Branch.cpp src/Lsystem/Branch.h src/Lsystem/DrawBranches.cpp src/Lsystem/DrawBranches.h src/boid/Cylinder.cpp src/boid/Cylinder.h src/matrix/CameraFlattenedMatrix.cpp src/matrix/CameraFlattenedMatrix.h)
 
 #########################################################
 # Include Files

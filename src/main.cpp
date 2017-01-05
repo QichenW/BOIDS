@@ -6,6 +6,7 @@
 
 #include <Lsystem/Branch.h>
 #include <Lsystem/DrawBranches.h>
+#include <matrix/CameraFlattenedMatrix.h>
 #include "boid/BoundaryDetector.h"
 #include "UserInputManager.h"
 #include "StringUtils.h"
@@ -36,7 +37,7 @@ void displayObject() {
     glColor3f(0.1, 0.45, 0.1);
     glMatrixMode(GL_MODELVIEW);
     //move the model view away from the camera, so that we are not inside the object1
-    glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
+    glMultMatrixf(CameraFlattenedMatrix::getCurrentCamera());
 
     if(objects[0]!= nullptr) {
         // draw walls and fish
@@ -52,19 +53,17 @@ void displayObject() {
 void drawFrame() {
     glLoadIdentity();
     glPushMatrix();
-    //move the model view away from the camera, so that we are not inside the object
-    glMultMatrixf((GLfloat []){0.707,0,0.707,0,0,1,0,0,-0.707,0,0.707,0,0,0,-100,1});
-//   glMultMatrixf((GLfloat []){1,0,0,0,0,1,0,0,0,0,1,0,0,0,-150,1});
+   glMultMatrixf(CameraFlattenedMatrix::getCurrentCamera());
     glColor3f(0.1, 0.45, 0.1);
     int i;
     GLfloat tempSum[3] = {};
     //check if 1. two boids are close enough, then they mark each other as neighbours
     // or 2. a boids is too close to the walls, the eliminate the velocity in the corresponding directions
-    BoundaryDetector::detectAll(objects, prefs.numberOfObjects);
+    BoundaryDetector::detectFellowsAndWalls(objects, prefs.numberOfObjects);
     // if one goal is met, generate another goal
     Fish::updateGoal();
     for(i = 6; i <prefs.numberOfObjects; i++){
-        ((Fish *) objects[i])->getCombinedDesires();
+        ((Fish *) objects[i])->findDesiresThenSetAcclrtn();
         //move the boid
         ((Fish *) objects[i])->updateFlattenedTransformationMatrix(increment);
         // let the articulated body and fish rotate
@@ -88,8 +87,8 @@ void display(void) {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    UserInterfaceManager::printMessageForBouncingBalls(
-            prefs.numberOfObjects, DrawObjects::NUMBER_OF_WALLS, prefs.getIsPlaying());
+    UserInterfaceManager::printMessageForFishTank(
+            Fish::amount, Cylinder::amount, prefs.getIsPlaying());
     if(!prefs.getIsPlaying()){
         // if there is no user input, show an walking in straight line animation
         displayObject();
@@ -109,7 +108,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(1280, 720);
     glutInitWindowPosition(100, 100);
-    window = glutCreateWindow("CSCI 6555 project 4 : BOIDS");
+    window = glutCreateWindow("BOIDS (Author: Qichen Wang, vincent.q.wang@gmail.com)");
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
     glutIdleFunc(display);

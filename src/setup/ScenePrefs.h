@@ -42,7 +42,6 @@ public:
     vector<GLfloat*> listOfEulerAngle;
     vector<GLfloat*> listOfPositions;
     vector<GLfloat*> listOfVelocity;
-    vector<GLfloat*> listOfAngularVelo;
     vector<GLfloat> listOfSphereRadius;
     vector<int> listOfReefSizes;
     vector<GLfloat*> listOfObsPositions;
@@ -57,8 +56,6 @@ public:
     void addOneInitOrientation(GLfloat *oneOrientation);
 
     void addOneVelocity(GLfloat *oneVelocity);
-
-    void addOneAngularVelo(GLfloat *oneAngularVelo);
 
     void addOneSphereRadius(GLfloat m);
 

@@ -7,6 +7,8 @@
 #include <nfd.h>
 #include <setup/SceneSetupFileLoader.h>
 #include <Lsystem/DrawBranches.h>
+#include <boid/Cylinder.h>
+#include <matrix/CameraFlattenedMatrix.h>
 #include "UserInputManager.h"
 
 static int* windowID;
@@ -31,11 +33,16 @@ void UserInputManager::setMouseMenuBehavior(int id){
             // choose the user provided text file in a "native file dialog"
             if (loadUserInputFromFileDialog()) {
                 prefsPointer->setInputLoaded(true);
-                // prepare walls and fish
+                // prepare walls and fish's polygon and instances
                 DrawObjects::prepareObjects(prefsPointer, allObjs);
-                //TODO test this prepare reefs
+                //prepare the polygons of reefs
                 DrawBranches::prepare(prefsPointer);
-
+                //TODO test this prepare the instances of Cylinder representing the reefs
+                int i;
+                Cylinder::setBottomOfTankY(prefsPointer->bottomWallY);
+                for(i = 0; i< prefsPointer->numberOfObstacles; i++){
+                    Cylinder(prefsPointer->listOfReefSizes[i], prefsPointer->listOfObsPositions[i]);
+                }
             }
             break;
         //reset the preferences
@@ -80,6 +87,9 @@ void UserInputManager::keyboardFunc(unsigned char key, int x, int y) {
     switch ((char) key) {
         case 'a':
             prefsPointer->resetPreferences();
+            break;
+        case 'r':
+            CameraFlattenedMatrix::switchCamera();
             break;
         case 'q':
         case 'Q':

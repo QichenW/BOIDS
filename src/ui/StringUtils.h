@@ -14,10 +14,10 @@
 
 class UserInterfaceManager {
 public:
-    static void printMessageForBouncingBalls(int numberOfObjs, int numberOfWalls, bool isPlaying);
+    static void printMessageForFishTank(int numberOfFish, int numberOfReefs, bool isPlaying);
 
 private:
-    static char* buildString(int nb, int nw, const char **pointer, int numberOfSegments);
+    static char* buildString(int nb, int nr, const char **pointer, int numberOfSegments);
 
     static void printInWindow(char *strInfo, bool isStatusInfo);
 

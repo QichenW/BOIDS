@@ -1,5 +1,5 @@
 //
-// Created by Qichen on 9/24/16.
+// Created by Qichen on 9/24/16. Last edited on 1/5/2017
 //
 
 #include <cstring>
@@ -9,21 +9,21 @@
 
 static const char * strReqestMouseInput ="Right click and load a setup (.txt) file";
 static const char *strFileLoaded =" loaded, start animation or reset";
-static const char *strWalls =" walls";
+static const char *strReefs =" reefs";
 static const char *strFish =" fish & ";
 static char *strStatusInfo;
 
 /****
  * This function takes care of what text to be displayed on the window
  */
-void UserInterfaceManager::printMessageForBouncingBalls(int numberOfObjs, int numberOfWalls, bool isPlaying) {
+void UserInterfaceManager::printMessageForFishTank(int numberOfFish, int numberOfReefs, bool isPlaying) {
     int numberOfStrs;
-    if (numberOfObjs == 0){
+    if (numberOfFish == 0){
             strStatusInfo = buildString((const char *[]) {strReqestMouseInput}, 1);
     } else {
         numberOfStrs = isPlaying ? 4 : 5;
-            strStatusInfo = buildString( numberOfObjs - numberOfWalls, numberOfWalls,
-                    (const char *[]) {strFish, strWalls, strFileLoaded}, numberOfStrs);
+            strStatusInfo = buildString( numberOfFish, numberOfReefs,
+                    (const char *[]) {strFish, strReefs, strFileLoaded}, numberOfStrs);
     }
     printInWindow(strStatusInfo, !isPlaying);
 }
@@ -72,20 +72,20 @@ char *UserInterfaceManager::buildString(const char **pointer, int numberOfSegmen
 /****
  * buildString is the helper function to generate a char * , which is a piece of info to display in the window.
  */
-char *UserInterfaceManager::buildString(int nb, int nw, const char **pointer, int numberOfSegments) {
+char *UserInterfaceManager::buildString(int nb, int nr, const char **pointer, int numberOfSegments) {
     int segmentCounter = 0;
     // allocate enough memory for this char*
     char *infoString= (char *) malloc(strlen(strFileLoaded)* 5);
 
-    char *ball= (char *) malloc(1);
-    char *wall= (char *) malloc(1);
-    sprintf(ball, "%d", nb);
-    sprintf(wall, "%d", nw);
+    char *fish= (char *) malloc(1);
+    char *reefs= (char *) malloc(1);
+    sprintf(fish, "%d", nb);
+    sprintf(reefs, "%d", nr);
     while(segmentCounter  < numberOfSegments) {
         if(segmentCounter == 0){
-            strcat(infoString, (const char *) ball);
+            strcat(infoString, (const char *) fish);
         } else if (segmentCounter == 2){
-            strcat(infoString, (const char *) wall);
+            strcat(infoString, (const char *) reefs);
         } else {
             strcat(infoString, *pointer++);
         }

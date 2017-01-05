@@ -94,7 +94,6 @@ void DrawObjects::prepareObjects(ScenePrefs *pPrefs, Object **pObjects) {
     orientations = pPrefs->listOfEulerAngle;
     positions = pPrefs->listOfPositions;
     velocities = pPrefs->listOfVelocity;
-    angularVelos = pPrefs->listOfAngularVelo;
 //TODO test only
     for(i = 0; i < numberOfObjects; i++){
         for(j = 0; j < 3; j++){
@@ -102,7 +101,7 @@ void DrawObjects::prepareObjects(ScenePrefs *pPrefs, Object **pObjects) {
                 cout<<orientations.at(i)[j] << "/" << positions.at(i)[j] << "\t";
             } else {
                 cout<<orientations.at(i)[j] << "/" << positions.at(i)[j] << "/"
-                    << velocities.at(i - NUMBER_OF_WALLS)[j]<< "/" <<angularVelos.at(i - NUMBER_OF_WALLS)[j]<< "\t";
+                    << velocities.at(i - NUMBER_OF_WALLS)[j]<< "\t";
             }
         }
         cout<<"\n";

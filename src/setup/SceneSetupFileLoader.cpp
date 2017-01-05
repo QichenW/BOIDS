@@ -62,10 +62,7 @@ void SceneSetupFileLoader::loadPreferencesFromTextFile(char *path, ScenePrefs *p
         } else if(strcmp(firstWord, "v") == 0) {
             fscanf(setupFilePointer, "%f %f %f", &tempFloat[0], &tempFloat[1], &tempFloat[2]);
             prefs->addOneVelocity(tempFloat);
-        }else if(strcmp(firstWord, "a") == 0) {
-            fscanf(setupFilePointer, "%f %f %f", &tempFloat[0], &tempFloat[1], &tempFloat[2]);
-            prefs->addOneAngularVelo(tempFloat);
-        } else if (strcmp(firstWord, "r") == 0){
+        }else if (strcmp(firstWord, "r") == 0){
             for(count = 0; count < numberOfObjects - numberOfWalls; count++){
                 fscanf(setupFilePointer, "%f", &tempRadius);
                 prefs->addOneSphereRadius(tempRadius);

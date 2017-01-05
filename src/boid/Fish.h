@@ -34,9 +34,9 @@ public:
     GLfloat bodyLocalRotation[3] = {};
     GLfloat tailLocalRotation[3] = {};
 
-    void getCombinedDesires();
+    void findDesiresThenSetAcclrtn();
     void setIndividualCentroid(GLfloat x, GLfloat y, GLfloat z);
-
+    void rotateBodyAndTail();
     vector<Fish *> vectorOfNeighbours;
 
     static void updateFlockCentroid(GLfloat sumOfPos[3]);
@@ -50,9 +50,6 @@ public:
     GLfloat bodyAlignFlat2[16];
     GLfloat tailAlignFlat1[16];
     GLfloat tailAlignFlat2[16];
-
-    void rotateBodyAndTail();
-
 private:
     static const int X_DIRECTION;
     static const int Y_DIRECTION;
@@ -73,6 +70,9 @@ private:
 
     int scaleMultiplier;
     GLfloat deltaAngle = 8; //may change
+
+
+    static void randomizeGoal();
 };
 
 #endif //BOIDS_PREY_H

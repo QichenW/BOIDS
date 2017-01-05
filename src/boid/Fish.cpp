@@ -2,6 +2,7 @@
 // Created by Qichen on 11/12/16.
 //
 #include "Fish.h"
+#include "BoundaryDetector.h"
 
 const int Fish::X_DIRECTION = 0;
 const int Fish::Y_DIRECTION = 1;
@@ -68,7 +69,7 @@ void Fish::updateFlattenedTransformationMatrix(GLfloat t) {
             *(velocity + i) *= MAX_VELOCITY / veloMagnitude;
         }
     }
-    // rotate body by referring to old travel direction and new velocity
+   // rotate body by referring to old travel direction and new velocity
     rotateBodyAndSetTranslation(velocity);
 }
 
@@ -107,10 +108,13 @@ void Fish::setAcclrtnWithDesires(GLfloat *sDesire, GLfloat *aDesire, GLfloat *cD
     for( i = 0; i < 3; i++){
         *(acclrtn + i) = *(combinedDesire + i);
     }
+
+    // TODO test this, finally rotate velocity if there is a potential collision with "reef" cylinders
+    BoundaryDetector::avoidObstacles(this);
 }
 
-//TODO change this function - get combinded desires
-void Fish::getCombinedDesires() {
+//TODO change this function - get combined desires
+void Fish::findDesiresThenSetAcclrtn() {
     unsigned long j;
     int noOfNeighbours = (int) vectorOfNeighbours.size();
     // alignment, cohesion, separation
@@ -202,12 +206,36 @@ void Fish::updateGoal() {
     if (VectorCalculation::getDistance(goal, flockCentroid) > amount / 2 * biggestRadius){
        return;
     }
-    goal[0] = rand() % 187 - 93;
+    randomizeGoal();
+    bool isGoalValid = false;
+    int i;
+    Cylinder * c;
+    while(!isGoalValid){
+        for (i = 0; i < Cylinder::amount; i++) {
+            c = &Cylinder::cylinders[i];
+            isGoalValid = true;
+            if(goal[1] < c->yPosOfTopSurface + biggestRadius &&
+                    sqrtf((float) (pow(goal[0] - c->axisCoordinateX, 2) + pow(goal[2] - c->axisCoordinateZ, 2)))
+                    < c->radius + biggestRadius) {
+               // if the goal is inside one cylinder, randomize it again and check again
+                isGoalValid = false;
+                randomizeGoal();
+                break;
+            }
+        }
+    }
     cout<< "Current goal is " << goal[0] <<'\t';
-    goal[1] = rand()%87 - 43;
     cout<< goal[1] <<'\t';
-    goal[2] = rand()%87 - 43;
     cout<< goal[2] <<endl;
+}
+
+/**
+ * randomize the goal position
+ */
+void Fish::randomizeGoal() {
+    goal[0] = rand() % 187 - 93;
+    goal[1] = rand()%87 - 43;
+    goal[2] = rand()%87 - 43;
 }
 
 /**

@@ -125,15 +125,6 @@ void ScenePrefs::addOneVelocity(GLfloat *oneVelocity) {
     listOfVelocity.push_back(vv);
 }
 
-void ScenePrefs::addOneAngularVelo(GLfloat *oneAngularVelo) {
-    int j;
-    GLfloat *av = (GLfloat *) malloc(sizeof(GLfloat) * 3);
-    for (j = 0; j < 3; j++){
-        av[j] = *(oneAngularVelo + j);
-    }
-    listOfAngularVelo.push_back(av);
-}
-
 void ScenePrefs::addOneSphereRadius(GLfloat m) {
     listOfSphereRadius.push_back(m);
 }
