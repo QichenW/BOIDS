@@ -74,9 +74,9 @@ j 0    0    0
 j 0    180    0
 j 0    165    0
 k -15    999 0
-k 20   999  40
+k 20   999  20
 k 60   999  10
-k -85   999  35
+k -65   999  -25
 s 3 1 2 1
 
 ### lines start with "#" are comments; in-line comments are NOT supported.

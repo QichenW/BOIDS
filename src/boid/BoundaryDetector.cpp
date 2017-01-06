@@ -132,10 +132,10 @@ void BoundaryDetector::avoidObstacles(Fish *pFish) {
                 // get the quaternion representing this detour rotation
                 GLfloat tempQuat[4] = {cosf(halfAngle), 0, sinf(halfAngle) * rotationAxis[1], 0};
                 // update the fish's velocity by the result of rotating the xzPlanarVelo
-                GLfloat desiredVelo[3] = {};
                 GLfloat veloY= pFish->velocity[1];
                 RotationHelper::rotateAvectorWithQuaternion(pFish->velocity, tempQuat, xzPlanarVelo);
                 pFish->velocity[1] = veloY;
+                pFish->acclrtn[0] = 0; pFish->acclrtn[2] = 0;
                 //TODO test above code
             } else if (pFish->getTranslation()[1] > pCylinder->yPosOfTopSurface &&
                        pFish->velocity[1] < 0) {
